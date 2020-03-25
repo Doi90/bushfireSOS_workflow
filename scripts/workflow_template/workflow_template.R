@@ -49,6 +49,23 @@
 
 library(bushfireSOS)
 
+#########################
+### Load Species Data ###
+#########################
+
+# Load appropriate species data.
+
+# Comment out unused methods instead of deleting them in case more
+# data becomes available at a later date
+
+## Presence background data
+
+spp_data <- bushfireSOS::load_pres_bg_data()
+
+## Presence absence data
+
+spp_data <- bushfireSOS::load_pres_abs_data()
+
 #####################
 ### SDM Required? ###
 #####################
@@ -66,23 +83,6 @@ library(bushfireSOS)
 # Y/N
 
 # If yes, how should we ensure its suitable for our purposes?
-
-#########################
-### Load Species Data ###
-#########################
-
-# Load appropriate species data.
-
-# Comment out unused methods instead of deleting them in case more
-# data becomes available at a later date
-
-## Presence background data
-
-spp_data <- bushfireSOS::load_pres_bg_data()
-
-## Presence absence data
-
-spp_data <- bushfireSOS::load_pres_abs_data()
 
 ###############################
 ### Load Environmental Data ###
