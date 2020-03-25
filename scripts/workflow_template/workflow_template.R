@@ -60,11 +60,13 @@ library(bushfireSOS)
 
 ## Presence background data
 
-spp_data <- bushfireSOS::load_pres_bg_data()
+spp_data <- bushfireSOS::load_pres_bg_data(species,
+                                           region)
 
 ## Presence absence data
 
-spp_data <- bushfireSOS::load_pres_abs_data()
+spp_data <- bushfireSOS::load_pres_abs_data(species,
+                                            region)
 
 #####################
 ### SDM Required? ###
@@ -90,13 +92,16 @@ spp_data <- bushfireSOS::load_pres_abs_data()
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data()
+env_data <- bushfireSOS::load_env_data(guild,
+                                       region)
 
 ######################
 ### Region Masking ###
 ######################
 
 # Might change how this section works
+# We're going to pre-mask rasters
+# Still need to load a mask to mask predictions
 
 mask <- bushfireSOS::mask_data()
 
@@ -108,6 +113,8 @@ mask <- bushfireSOS::mask_data()
 
 # Comment out unused methods instead of deleting them in case more
 # data becomes available at a later date
+
+# Any guild/region specific things to happen here?
 
 ## Presence only
 
@@ -135,7 +142,7 @@ model_eval <- bushfireSOS::model_evaluation()
 
 # Perform appropriate prediction
 
-prediction <- bushfireSOS::model_prediction()
+prediction <- bushfireSOS::model_prediction(region)
 
 ###########################
 ### Zonation Formatting ###
