@@ -11,6 +11,7 @@ assignees: ''
 
 Common name:
 Scientific name:
+Group:
 Region: 
 Analyst:
 Reviewer (code): 
