@@ -1,7 +1,7 @@
 ---
 name: New species workflow
 about: Template for species-specific workflow issues
-title: ''
+title: "<Species common name> <Species scientific name> workflow"
 labels: unassigned
 assignees: ''
 
@@ -9,7 +9,8 @@ assignees: ''
 
 **Workflow details**
 
-Species:
+Common name:
+Scientific name:
 Region: 
 Analyst:
 Reviewer (code): 
