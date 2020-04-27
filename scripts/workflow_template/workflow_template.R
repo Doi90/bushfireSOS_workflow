@@ -60,8 +60,11 @@ library(bushfireSOS)
 
 ## Presence background data
 
-spp_data <- bushfireSOS::load_pres_bg_data(species,
-                                           region)
+spp_data <- bushfireSOS::load_pres_bg_data(species = "",
+                                           # region = "",
+                                           save.map = TRUE,
+                                           map.directory = "outputs/data_outputs",
+                                           email = "")
 
 ## Presence absence data
 
