@@ -107,7 +107,7 @@ env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spati
 # We're going to pre-mask rasters
 # Still need to load a mask to mask predictions
 
-mask <- bushfireSOS::mask_data()
+# mask <- bushfireSOS::mask_data()
 
 #########################
 ### Background Points ###
