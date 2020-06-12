@@ -60,16 +60,17 @@ library(bushfireSOS)
 
 ## Presence background data
 
-spp_data <- bushfireSOS::load_pres_bg_data(species = "",
-                                           # region = "",
-                                           save.map = TRUE,
-                                           map.directory = "outputs/data_outputs",
-                                           email = "")
+spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = "Petauroides volans",
+                                               region = c("NSW", "VIC", "QLD"),
+                                               save.map = TRUE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "davidpw@student.unimelb.edu.au",
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 ## Presence absence data
 
-spp_data <- bushfireSOS::load_pres_abs_data(species,
-                                            region)
+# spp_data <- bushfireSOS::load_pres_abs_data(species,
+#                                             region)
 
 #####################
 ### SDM Required? ###
@@ -95,8 +96,8 @@ spp_data <- bushfireSOS::load_pres_abs_data(species,
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(guild,
-                                       region)
+env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/z_test_environment/test_stack_masked.tif",
+                                       region = c("VIC","NSW", "QLD"))
 
 ######################
 ### Region Masking ###
@@ -107,6 +108,28 @@ env_data <- bushfireSOS::load_env_data(guild,
 # Still need to load a mask to mask predictions
 
 mask <- bushfireSOS::mask_data()
+
+#########################
+### Background Points ###
+#########################
+
+# Generate our background points
+
+spp_data <- bushfireSOS::background_points(species = "Petauroides volans",
+                                           spp_data = spp_data,
+                                           guild = "Mammals",
+                                           region = c("VIC","NSW", "QLD"),
+                                           background_group = "vertebrates",
+                                           bias_layer = "bushfireResponse_data/spatial_layers/travel_time_to_cities_12.tif",
+                                           sample_min = 1000)
+
+#######################
+### Data Extraction ###
+#######################
+
+spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
+                                             env_data = env_data)
+
 
 #####################
 ### Model Fitting ###
@@ -121,15 +144,18 @@ mask <- bushfireSOS::mask_data()
 
 ## Presence only
 
-model <- bushfireSOS::fit_pres_bg_model()
+model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
+                                        tuneParam = TRUE,
+                                        k = 5,
+                                        parallel = FALSE)
 
 ## Presence absence model
 
-model <- bushfireSOS::fit_pres_abs_model()
+# model <- bushfireSOS::fit_pres_abs_model()
 
 ## Hybrid model
 
-model <- bushfireSOS::fit_hybrid_model()
+# model <- bushfireSOS::fit_hybrid_model()
 
 ########################
 ### Model Evaluation ###
@@ -137,7 +163,10 @@ model <- bushfireSOS::fit_hybrid_model()
 
 # Perform appropriate model checking
 
-model_eval <- bushfireSOS::model_evaluation()
+model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
+                                          type = "po",
+                                          k = 5,
+                                          parallel = FALSE)
 
 ########################
 ### Model Prediction ###
@@ -145,7 +174,9 @@ model_eval <- bushfireSOS::model_evaluation()
 
 # Perform appropriate prediction
 
-prediction <- bushfireSOS::model_prediction(region)
+prediction <- bushfireSOS::model_prediction(model = model,
+                                            env_data = env_data,
+                                            parallel = FALSE)
 
 ###########################
 ### Zonation Formatting ###
