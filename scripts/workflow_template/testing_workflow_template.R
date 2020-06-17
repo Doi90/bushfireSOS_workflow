@@ -178,7 +178,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
 
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
-                                            mask = "",
+                                            mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428/NIAFED_20190701_20200428_v20200428_dissolved.shp",
                                             parallel = FALSE)
 
 ###########################
