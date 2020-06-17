@@ -96,7 +96,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = "Petauroides volans",
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/z_test_environment/test_stack_masked.tif",
+env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/bushfire_terre_layers_250_AA.tif",
                                        region = c("VIC","NSW", "QLD"))
 
 ######################
@@ -120,7 +120,7 @@ spp_data <- bushfireSOS::background_points(species = "Petauroides volans",
                                            guild = "Mammals",
                                            region = c("VIC","NSW", "QLD"),
                                            background_group = "vertebrates",
-                                           bias_layer = "bushfireResponse_data/spatial_layers/travel_time_to_cities_12.tif",
+                                           bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
 #######################
@@ -147,7 +147,8 @@ spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
 model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
-                                        parallel = FALSE)
+                                        parallel = FALSE,
+                                        features = "lqp")
 
 ## Presence absence model
 
@@ -166,7 +167,8 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
-                                          parallel = FALSE)
+                                          parallel = FALSE,
+                                          features = "lqp")
 
 ########################
 ### Model Prediction ###
@@ -176,6 +178,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
 
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
+                                            mask = "",
                                             parallel = FALSE)
 
 ###########################
