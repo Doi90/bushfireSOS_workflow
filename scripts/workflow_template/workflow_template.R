@@ -68,7 +68,7 @@ library(bushfireSOS)
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = region,
-                                               save.map = TRUE,
+                                               save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
