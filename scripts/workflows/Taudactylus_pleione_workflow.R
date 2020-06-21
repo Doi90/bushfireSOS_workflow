@@ -35,13 +35,13 @@
 ## Guild: Frogs                       # Or whatever we want to call our groups
 ## Region: QLD                        # Eastern seaboard/WA/Kangaroo Island?
 ## Analyst: David                     # Name of person who implemented workflow
-## Reviewer:                          # Name of person who checked workflow
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
+## Reviewer: Adam                     # Name of person who checked workflow
+## SDM Required: Y                    # Retain option to indicate method
+## Used existing SDM: Y               # Retain option to indicate method
+## Built SDM: N                       # Retain option to indicate method
 ## Data available: PO                 # Retain option to indicate method
 ## Type of SDM: PresBG                # Retain option to indicate method
-## Date completed:                    # Date workflow is finished (or last updated?)
+## Date completed: 21/6               # Date workflow is finished (or last updated?)
 
 species <- "Taudactylus pleione"
 
@@ -68,9 +68,9 @@ library(bushfireSOS)
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = region,
-                                               save.map = TRUE,
+                                               save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "davidpw@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 ## Presence absence data
@@ -117,12 +117,12 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# N. Potential revisit with QLD sensitive data.
 
 nrow(spp_data[spp_data$Value == 1, ])
 
 # Can we fit an SDM for this species?
-# Y/N 
+# N
 
 # If no, how should we create an output for Zonation?
 
