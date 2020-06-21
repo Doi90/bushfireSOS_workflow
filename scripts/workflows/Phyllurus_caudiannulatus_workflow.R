@@ -31,23 +31,23 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Scientific names?
-## Guild:                             # Or whatever we want to call our groups
-## Region:                            # Eastern seaboard/WA/Kangaroo Island?
-## Analyst:                           # Name of person who implemented workflow
+## Species: Phyllurus caudiannulatus  # Scientific names?
+## Guild: Reptiles                    # Or whatever we want to call our groups
+## Region: QLD                        # Eastern seaboard/WA/Kangaroo Island?
+## Analyst: David                     # Name of person who implemented workflow
 ## Reviewer:                          # Name of person who checked workflow
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
-## Date completed:                    # Date workflow is finished (or last updated?)
+## SDM Required: N (possible revisit) # Retain option to indicate method
+## Used existing SDM: Y               # Retain option to indicate method
+## Built SDM: N                       # Retain option to indicate method
+## Data available: PO                 # Retain option to indicate method
+## Type of SDM: PresBG                # Retain option to indicate method
+## Date completed: 21/6/20            # Date workflow is finished (or last updated?)
 
-species <- ""
+species <- "Phyllurus caudiannulatus"
 
-guild <- ""
+guild <- "Reptiles"
 
-region <- c("")
+region <- c("QLD")
 
 #####################
 ### Load Packages ###
@@ -70,7 +70,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = region,
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "davidpw@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 ## Presence absence data
@@ -122,7 +122,8 @@ saveRDS(spp_data,
 nrow(spp_data[spp_data$Value == 1, ])
 
 # Can we fit an SDM for this species?
-# Y/N 
+# No. Only four records without censored coordinates.
+# Possible revisit if QLD Gov finally gets back to us with uncensored data.
 
 # If no, how should we create an output for Zonation?
 
