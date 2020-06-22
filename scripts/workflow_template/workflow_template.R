@@ -16,13 +16,13 @@
 ###   Species-specific workflow files are ###
 ### to be saved as:                       ###
 ###                                       ###
-###   "workflow_species_name.R"           ###
+###   "species_name_workflow.R"           ###
 ###                                       ###
 ###   Species-specific workflow files are ###
-### to be saved in the appropriate guild  ###
+### to be saved in the appropriate        ###
 ### folder:                               ###
 ###                                       ###
-###   "scripts/workflows/<guild>"         ###
+###   "scripts/workflows"                 ###
 ###                                       ###
 #############################################
 #############################################
