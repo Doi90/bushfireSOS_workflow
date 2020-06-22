@@ -16,13 +16,13 @@
 ###   Species-specific workflow files are ###
 ### to be saved as:                       ###
 ###                                       ###
-###   "workflow_species_name.R"           ###
+###   "species_name_workflow.R"           ###
 ###                                       ###
 ###   Species-specific workflow files are ###
-### to be saved in the appropriate guild  ###
+### to be saved in the appropriate        ###
 ### folder:                               ###
 ###                                       ###
-###   "scripts/workflows/<guild>"         ###
+###   "scripts/workflows"                 ###
 ###                                       ###
 #############################################
 #############################################
@@ -47,8 +47,6 @@ species <- ""
 
 guild <- ""
 
-region <- c("")
-
 #####################
 ### Load Packages ###
 #####################
@@ -67,16 +65,23 @@ library(bushfireSOS)
 ## Presence background data
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = region,
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
+region <- bushfireSOS::species_data_get_state_character(spp_data$data)
+
 ## Presence absence data
 
 # spp_data <- bushfireSOS::load_pres_abs_data(species,
 #                                             region)
+
+## Preliminary presence records check
+## If <20 can end workflow here
+
+nrow(spp_data$data)
 
 ###############################
 ### Load Environmental Data ###
@@ -119,7 +124,7 @@ saveRDS(spp_data,
 # Do we have >=20 presence records?
 # Y/N
 
-nrow(spp_data[spp_data$Value == 1, ])
+nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
 # Y/N 
