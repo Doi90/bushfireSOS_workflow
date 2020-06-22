@@ -71,7 +71,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
-region <- spp_data$region
+region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
 ## Presence absence data
 
