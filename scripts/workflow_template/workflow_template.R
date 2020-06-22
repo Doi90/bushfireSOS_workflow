@@ -47,8 +47,6 @@ species <- ""
 
 guild <- ""
 
-region <- c("")
-
 #####################
 ### Load Packages ###
 #####################
@@ -67,11 +65,13 @@ library(bushfireSOS)
 ## Presence background data
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = region,
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+region <- spp_data$region
 
 ## Presence absence data
 
