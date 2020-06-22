@@ -78,6 +78,11 @@ region <- spp_data$region
 # spp_data <- bushfireSOS::load_pres_abs_data(species,
 #                                             region)
 
+## Preliminary presence records check
+## If <20 can end workflow here
+
+nrow(spp_data$data)
+
 ###############################
 ### Load Environmental Data ###
 ###############################
@@ -119,7 +124,7 @@ saveRDS(spp_data,
 # Do we have >=20 presence records?
 # Y/N
 
-nrow(spp_data[spp_data$Value == 1, ])
+nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
 # Y/N 
