@@ -16,13 +16,13 @@
 ###   Species-specific workflow files are ###
 ### to be saved as:                       ###
 ###                                       ###
-###   "workflow_species_name.R"           ###
+###   "species_name_workflow.R"           ###
 ###                                       ###
 ###   Species-specific workflow files are ###
-### to be saved in the appropriate guild  ###
+### to be saved in the appropriate        ###
 ### folder:                               ###
 ###                                       ###
-###   "scripts/workflows/<guild>"         ###
+###   "scripts/workflows"                 ###
 ###                                       ###
 #############################################
 #############################################
@@ -31,11 +31,11 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: Pseudemoia cryodroma      # Scientific names?
-## Guild: Reptiles                    # Or whatever we want to call our groups
-## Region: VIC                        # Eastern seaboard/WA/Kangaroo Island?
-## Analyst: David                     # Name of person who implemented workflow
-## Reviewer: Roozbeh                  # Name of person who checked workflow
+## Species:                           # Scientific names?
+## Guild:                             # Or whatever we want to call our groups
+## Region:                            # Eastern seaboard/WA/Kangaroo Island?
+## Analyst:                           # Name of person who implemented workflow
+## Reviewer:                          # Name of person who checked workflow
 ## SDM Required: Y/N                  # Retain option to indicate method
 ## Used existing SDM: Y/N             # Retain option to indicate method
 ## Built SDM: Y/N                     # Retain option to indicate method
@@ -43,11 +43,9 @@
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
 ## Date completed:                    # Date workflow is finished (or last updated?)
 
-species <- "Pseudemoia cryodroma"
+species <- ""
 
-guild <- "Reptiles"
-
-region <- c("VIC")
+guild <- ""
 
 #####################
 ### Load Packages ###
@@ -67,16 +65,23 @@ library(bushfireSOS)
 ## Presence background data
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = region,
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
 ## Presence absence data
 
 # spp_data <- bushfireSOS::load_pres_abs_data(species,
 #                                             region)
+
+## Preliminary presence records check
+## If <20 can end workflow here
+
+nrow(spp_data$data)
 
 ###############################
 ### Load Environmental Data ###
@@ -117,12 +122,12 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y
+# Y/N
 
 nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
-# Y 
+# Y/N 
 
 # If no, how should we create an output for Zonation?
 
