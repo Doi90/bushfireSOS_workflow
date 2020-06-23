@@ -43,9 +43,9 @@
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
 ## Date completed:                    # Date workflow is finished (or last updated?)
 
-species <- ""
+species <- "Pseudemoia cryodroma"
 
-guild <- ""
+guild <- "Reptiles"
 
 #####################
 ### Load Packages ###
@@ -68,7 +68,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "davidpw@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -122,12 +122,12 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
@@ -157,7 +157,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lqp")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -182,7 +182,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "default")
+                                          features = "lqp")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -201,7 +201,8 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)),
+                    overwrite = TRUE)
 
 #################
 ### Meta Data ###
