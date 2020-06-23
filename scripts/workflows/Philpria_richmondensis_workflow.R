@@ -31,21 +31,21 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: 
-## Guild: 
-## Region:
-## Analyst:  
-## Reviewer:  
-## SDM Required: 
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
+## Species: "Philoria richmondensis"
+## Guild: "Frogs"
+## Region: "
+## Analyst: "Adam"
+## Reviewer: "David" 
+## SDM Required: N
+## Used existing SDM: N             # Retain option to indicate method
+## Built SDM: N                     # Retain option to indicate method
 ## Data available: PO/PA              # Retain option to indicate method
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
-## Date completed: "23/06/2020"
+## Date completed: "24/06/2020"
 
-species <- ""
+species <- "Philoria richmondensis" # species records = 0
 
-guild <- ""
+guild <- "Frogs"
 
 #####################
 ### Load Packages ###
