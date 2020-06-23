@@ -43,7 +43,7 @@
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
 ## Date completed: "23/06/2020"
 
-species <- "Saltuarius katae"
+species <- "Saltuarius kateae"
 
 guild <- "Reptiles"
 
