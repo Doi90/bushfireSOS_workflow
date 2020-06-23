@@ -31,17 +31,17 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Scientific names?
-## Guild:                             # Or whatever we want to call our groups
-## Region:                            # Eastern seaboard/WA/Kangaroo Island?
-## Analyst:                           # Name of person who implemented workflow
-## Reviewer:                          # Name of person who checked workflow
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
-## Date completed:                    # Date workflow is finished (or last updated?)
+## Species: Pseudemoia cryodroma      # Scientific names?
+## Guild: Reptiles                    # Or whatever we want to call our groups
+## Region: VIC/NSW                    # Eastern seaboard/WA/Kangaroo Island?
+## Analyst: David                     # Name of person who implemented workflow
+## Reviewer: Adam                     # Name of person who checked workflow
+## SDM Required: Y                    # Retain option to indicate method
+## Used existing SDM: N               # Retain option to indicate method
+## Built SDM: Y                       # Retain option to indicate method
+## Data available: PO                 # Retain option to indicate method
+## Type of SDM: PresBG                # Retain option to indicate method
+## Date completed: 23/6/20            # Date workflow is finished (or last updated?)
 
 species <- "Pseudemoia cryodroma"
 
