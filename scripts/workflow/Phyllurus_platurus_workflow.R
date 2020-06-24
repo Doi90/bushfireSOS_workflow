@@ -36,11 +36,11 @@
 ## Region:                            # NSW
 ## Analyst:                           # Roozbeh Valavi
 ## Reviewer:                          # Darren Southwell @dsouthwell
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
+## SDM Required: Y/N                  # YES
+## Used existing SDM: Y/N             # NO
+## Built SDM: Y/N                     # YES
+## Data available: PO/PA              # PO
+## Type of SDM: PresBG/PresAbs/Hybrid # PresBG
 ## Date completed:                    # 24-06-2020
 
 species <- "Phyllurus platurus"
