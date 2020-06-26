@@ -81,7 +81,7 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 ## Preliminary presence records check
 ## If <20 can end workflow here
 
-nrow(spp_data$data) 
+nrow(spp_data$data) # 3 points
 
 ###############################
 ### Load Environmental Data ###
