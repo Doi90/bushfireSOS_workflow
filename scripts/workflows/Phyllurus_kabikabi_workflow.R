@@ -31,11 +31,11 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Scientific names?
-## Guild:                             # Or whatever we want to call our groups
-## Region:                            # Eastern seaboard/WA/Kangaroo Island?
-## Analyst:                           # Name of person who implemented workflow
-## Reviewer:                          # Name of person who checked workflow
+## Species: Phyllurus kabikabi
+## Guild: Reptiles
+## Region: QLD
+## Analyst: Adam
+## Reviewer: David
 ## SDM Required: Y/N                  # Retain option to indicate method
 ## Used existing SDM: Y/N             # Retain option to indicate method
 ## Built SDM: Y/N                     # Retain option to indicate method
@@ -43,9 +43,9 @@
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
 ## Date completed:                    # Date workflow is finished (or last updated?)
 
-species <- ""
+species <- "Phyllurus kabikabi"
 
-guild <- ""
+guild <- "Reptiles"
 
 #####################
 ### Load Packages ###
@@ -68,7 +68,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "asmart1@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
