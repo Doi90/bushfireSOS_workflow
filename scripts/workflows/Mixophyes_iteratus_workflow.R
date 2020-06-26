@@ -31,11 +31,11 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: "Mixophyes iteratus"
-## Guild: "Frogs"
+## Species: Mixophyes iteratus
+## Guild: Frogs
 ## Region: c("QLD", "NSW")
-## Analyst: "Adam"
-## Reviewer: "Darren"
+## Analyst: Adam
+## Reviewer: Darren
 ## SDM Required: N
 ## Used existing SDM: Y/N             # Retain option to indicate method
 ## Built SDM: Y/N                     # Retain option to indicate method
