@@ -91,6 +91,9 @@ nrow(spp_data$data)
 env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/bushfire_terre_layers_250_AA.tif",
                                        region = region)
 
+# #I wrote to local and loaded in the raster between session restarts
+# env_data <- raster::stack("bushfireResponse_data/predlayers_QLD_NSW.tif")
+
 #########################
 ### Background Points ###
 #########################
@@ -128,10 +131,10 @@ saveRDS(spp_data,
 
 # Do we have >=20 presence records?
 # Y/N
-
+Y
 # Can we fit an SDM for this species?
 # Y/N 
-
+Y
 # If no, how should we create an output for Zonation?
 
 #########################
@@ -185,7 +188,7 @@ saveRDS(model,
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
-                                          k = 5,
+                                          k = 4,
                                           parallel = FALSE,
                                           features = "default")
 
