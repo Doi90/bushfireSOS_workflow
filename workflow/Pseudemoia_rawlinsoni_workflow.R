@@ -31,21 +31,21 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Litoria piperata
-## Guild:                             # Frogs
-## Region:                            # NSW
+## Species:                           # Pseudemoia rawlinsoni
+## Guild:                             # Reptiles
+## Region:                            # "ACT" "VIC" "TAS" "NSW" "SA" 
 ## Analyst:                           # Roozbeh Valavi
-## Reviewer:                          # August Hao @AugustHao
-## SDM Required: Y/N                  # NO
-## Used existing SDM: Y/N             # NO
-## Built SDM: Y/N                     # NO
-## Data available: PO/PA              # PO
-## Type of SDM: PresBG/PresAbs/Hybrid # NA
-## Date completed:                    # 20-06-2020
+## Reviewer:                          # David Wilkinson @Doi90
+## SDM Required: Y/N                  # Retain option to indicate method
+## Used existing SDM: Y/N             # Retain option to indicate method
+## Built SDM: Y/N                     # Retain option to indicate method
+## Data available: PO/PA              # Retain option to indicate method
+## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
+## Date completed:                    # 27-06-2020
 
-species <- "Litoria piperata"
+species <- "Pseudemoia rawlinsoni"
 
-guild <- "Frogs"
+guild <- "Reptiles"
 
 #####################
 ### Load Packages ###
@@ -64,14 +64,13 @@ library(bushfireSOS)
 
 ## Presence background data
 
-tm <- Sys.time()
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "rvalavi@student.unimelb.edu.au",
                                                file.vic = "../../bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
-Sys.time() - tm
+spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 print(region)
@@ -109,6 +108,12 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            bias_layer = "../../bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
+## Check that there are >= 20 presences (1s) and an appropriate number of
+## background points (1000 * number of states with data for target group,
+## or 10,000 for random)
+
+table(spp_data$data$Value)
+
 #######################
 ### Data Extraction ###
 #######################
@@ -126,8 +131,6 @@ saveRDS(spp_data,
 
 # Do we have >=20 presence records?
 # Y/N
-
-nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
 # Y/N 
@@ -160,7 +163,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lqp")
 
 saveRDS(model,
         sprintf("../../bushfireResponse_data/outputs/model/model_%s.rds",
@@ -180,12 +183,14 @@ saveRDS(model,
 
 # Perform appropriate model checking
 # Ensure features is set identical to that of the above full model
+# If Boyce Index returns NAs then re-run the cross-validation with
+#  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
-                                          k = 4,
+                                          k = 5,
                                           parallel = FALSE,
-                                          features = "default")
+                                          features = "lqp")
 
 saveRDS(model_eval,
         sprintf("../../bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -200,8 +205,8 @@ saveRDS(model_eval,
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
                                             mask = "../../bushfireResponse_data/spatial_layers/NIAFED_v20200428",
-                                            parallel = TRUE, 
-                                            ncors = 6)
+                                            parallel = TRUE,
+                                            ncors = 4)
 
 raster::writeRaster(prediction,
                     sprintf("../../bushfireResponse_data/outputs/predictions/predictions_%s.tif",
