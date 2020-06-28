@@ -106,6 +106,12 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
+## Check that there are >= 20 presences (1s) and an appropriate number of
+## background points (1000 * number of states with data for target group,
+## or 10,000 for random)
+
+table(spp_data$data$Value)
+
 #######################
 ### Data Extraction ###
 #######################
@@ -123,8 +129,6 @@ saveRDS(spp_data,
 
 # Do we have >=20 presence records?
 # Y/N
-
-nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
 # Y/N 
@@ -177,6 +181,8 @@ saveRDS(model,
 
 # Perform appropriate model checking
 # Ensure features is set identical to that of the above full model
+# If Boyce Index returns NAs then re-run the cross-validation with
+#  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
