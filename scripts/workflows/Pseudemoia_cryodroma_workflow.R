@@ -31,21 +31,21 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: Pseudemoia cryodroma      # Scientific names?
-## Guild: Reptiles                    # Or whatever we want to call our groups
-## Region: VIC/NSW                    # Eastern seaboard/WA/Kangaroo Island?
-## Analyst: David                     # Name of person who implemented workflow
-## Reviewer: Adam                     # Name of person who checked workflow
-## SDM Required: Y                    # Retain option to indicate method
-## Used existing SDM: N               # Retain option to indicate method
-## Built SDM: Y                       # Retain option to indicate method
-## Data available: PO                 # Retain option to indicate method
-## Type of SDM: PresBG                # Retain option to indicate method
-## Date completed: 23/6/20            # Date workflow is finished (or last updated?)
+## Species:                           # Scientific names?
+## Guild:                             # Or whatever we want to call our groups
+## Region:                            # Eastern seaboard/WA/Kangaroo Island?
+## Analyst:                           # Name of person who implemented workflow
+## Reviewer:                          # Name of person who checked workflow
+## SDM Required: Y/N                  # Retain option to indicate method
+## Used existing SDM: Y/N             # Retain option to indicate method
+## Built SDM: Y/N                     # Retain option to indicate method
+## Data available: PO/PA              # Retain option to indicate method
+## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
+## Date completed:                    # Date workflow is finished (or last updated?)
 
-species <- "Pseudemoia cryodroma"
+species <- ""
 
-guild <- "Reptiles"
+guild <- ""
 
 #####################
 ### Load Packages ###
@@ -68,7 +68,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -106,6 +106,12 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
+## Check that there are >= 20 presences (1s) and an appropriate number of
+## background points (1000 * number of states with data for target group,
+## or 10,000 for random)
+
+table(spp_data$data$Value)
+
 #######################
 ### Data Extraction ###
 #######################
@@ -122,12 +128,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y
-
-nrow(spp_data$data[spp_data$data$Value == 1, ])
+# Y/N
 
 # Can we fit an SDM for this species?
-# Y 
+# Y/N 
 
 # If no, how should we create an output for Zonation?
 
@@ -157,7 +161,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "lqp")
+                                        features = "default")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -177,12 +181,14 @@ saveRDS(model,
 
 # Perform appropriate model checking
 # Ensure features is set identical to that of the above full model
+# If Boyce Index returns NAs then re-run the cross-validation with
+#  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "lqp")
+                                          features = "default")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -201,8 +207,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)),
-                    overwrite = TRUE)
+                            gsub(" ", "_", species)))
 
 #################
 ### Meta Data ###
