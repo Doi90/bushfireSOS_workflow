@@ -42,6 +42,8 @@
 ## Data available: PO/PA              # PO
 ## Type of SDM: PresBG/PresAbs/Hybrid # NA
 ## Date completed:                    # 20-06-2020
+## Number of occurrence               # 6 points
+## Comment                            #
 
 species <- "Litoria piperata"
 
@@ -91,7 +93,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "../../bushfireResponse_data/spatial_layers/bushfire_terre_layers_250_AA.tif",
+env_data <- bushfireSOS::load_env_data(stack_file = "../../bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################
@@ -207,6 +209,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
                                             mask = "../../bushfireResponse_data/spatial_layers/NIAFED_v20200428",
                                             parallel = TRUE,
                                             ncors = 4)
+mapview::mapview(prediction)
 
 raster::writeRaster(prediction,
                     sprintf("../../bushfireResponse_data/outputs/predictions/predictions_%s.tif",
