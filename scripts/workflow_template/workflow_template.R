@@ -45,6 +45,7 @@
 ## Number of background points:
 ## Type of background points:
 ## Date completed:
+## Any other comments:
 
 species <- ""
 
@@ -211,6 +212,8 @@ prediction <- bushfireSOS::model_prediction(model = model,
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
                             gsub(" ", "_", species)))
+
+mapview::mapview(prediction)
 
 #################
 ### Meta Data ###
