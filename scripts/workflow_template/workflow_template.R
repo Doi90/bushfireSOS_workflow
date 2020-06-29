@@ -31,17 +31,20 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Scientific names?
-## Guild:                             # Or whatever we want to call our groups
-## Region:                            # Eastern seaboard/WA/Kangaroo Island?
-## Analyst:                           # Name of person who implemented workflow
-## Reviewer:                          # Name of person who checked workflow
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
-## Date completed:                    # Date workflow is finished (or last updated?)
+## Species:
+## Guild:
+## Region:
+## Analyst:
+## Reviewer:
+## SDM Required: Y/N
+## Used existing SDM: Y/N
+## Built SDM: Y/N
+## Data available: PO/PA
+## Type of SDM: PresBG/PresAbs/Hybrid
+## Number of presence records:
+## Number of background points:
+## Type of background points:
+## Date completed:
 
 species <- ""
 
