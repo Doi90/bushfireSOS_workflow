@@ -31,10 +31,10 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Scientific names?
-## Guild:                             # Or whatever we want to call our groups
-## Region:                            # Eastern seaboard/WA/Kangaroo Island?
-## Analyst:                           # Name of person who implemented workflow
+## Species: Pseudemoia cryodroma      # Scientific names?
+## Guild: Reptiles                    # Or whatever we want to call our groups
+## Region: VIC/NSW                    # Eastern seaboard/WA/Kangaroo Island?
+## Analyst: David                     # Name of person who implemented workflow
 ## Reviewer:                          # Name of person who checked workflow
 ## SDM Required: Y/N                  # Retain option to indicate method
 ## Used existing SDM: Y/N             # Retain option to indicate method
@@ -43,9 +43,9 @@
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
 ## Date completed:                    # Date workflow is finished (or last updated?)
 
-species <- ""
+species <- "Pseudemoia cryodroma"
 
-guild <- ""
+guild <- "Reptiles"
 
 #####################
 ### Load Packages ###
@@ -68,7 +68,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "davidpw@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -89,7 +89,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/bushfire_terre_layers_250_AA.tif",
+env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles/",
                                        region = region)
 
 #########################
