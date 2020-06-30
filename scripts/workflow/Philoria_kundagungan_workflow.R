@@ -41,7 +41,9 @@
 ## Built SDM: Y/N                     # NO
 ## Data available: PO/PA              # PO
 ## Type of SDM: PresBG/PresAbs/Hybrid # NA
-## Date completed:                    # 24-06-2020
+## Date completed:                    # 30-06-2020
+## Number of occurrence               #  
+## Comment                            #
 
 species <- "Philoria kundagungan"
 
