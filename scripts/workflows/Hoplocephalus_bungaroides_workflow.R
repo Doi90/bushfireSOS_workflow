@@ -36,7 +36,7 @@
 ## Region: NSW
 ## Analyst: Darren Southwell
 ## Reviewer: David Wilkinson @Doi90
-## SDM Required: Y
+## SDM Required: Yes
 ## Used existing SDM: One exists
 ## Built SDM: Y
 ## Data available: PO
