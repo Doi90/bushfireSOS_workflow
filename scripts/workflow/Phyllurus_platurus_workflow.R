@@ -41,7 +41,9 @@
 ## Built SDM: Y/N                     # YES
 ## Data available: PO/PA              # PO
 ## Type of SDM: PresBG/PresAbs/Hybrid # PresBG
-## Date completed:                    # 24-06-2020
+## Date completed:                    # 30-06-2020
+## Number of occurrence               # 155
+## Comment                            # random BG points
 
 species <- "Phyllurus platurus"
 
@@ -70,6 +72,8 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                map.directory = "outputs/data_outputs",
                                                email = "rvalavi@student.unimelb.edu.au",
                                                file.vic = "../../bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+# spp_data$data <- spp_data$data[-c(130, 118),]
+spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 print(region)
@@ -92,7 +96,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "../../bushfireResponse_data/spatial_layers/bushfire_terre_layers_250_AA.tif",
+env_data <- bushfireSOS::load_env_data(stack_file = "../../bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################
@@ -208,6 +212,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
                                             mask = "../../bushfireResponse_data/spatial_layers/NIAFED_v20200428",
                                             parallel = TRUE,
                                             ncors = 4)
+mapview::mapview(prediction)
 
 raster::writeRaster(prediction,
                     sprintf("../../bushfireResponse_data/outputs/predictions/predictions_%s.tif",
