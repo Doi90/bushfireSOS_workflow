@@ -31,21 +31,21 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## Species:Wollumbinia belli
+## Guild:Reptiles
+## Region:NSW
+## Analyst:A HAO
+## Reviewer:D Wilkinson
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records:135
+## Number of background points:9941
+## Type of background points:random
+## Date completed:30/06/2020
+## Any other comments:Note the addition of synonyms in the data getting process
 
 species <- "Wollumbinia belli"
 
