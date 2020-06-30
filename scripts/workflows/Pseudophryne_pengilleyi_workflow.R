@@ -35,16 +35,16 @@
 ## Guild: Frogs
 ## Region: NSW
 ## Analyst: Darren Southwell
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
+## Reviewer: Roozbeh Valavi @rvalavi
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
 ## Number of presence records: 91
-## Number of background points:
-## Type of background points:
-## Date completed:
+## Number of background points:10000
+## Type of background points: Random
+## Date completed: 30/06/2020
 ## Any other comments:
 
 species <- "Pseudophryne_pengilleyi"
