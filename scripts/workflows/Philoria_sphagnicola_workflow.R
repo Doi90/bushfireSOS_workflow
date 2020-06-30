@@ -31,17 +31,21 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:                           # Scientific names?
-## Guild:                             # Or whatever we want to call our groups
-## Region:                            # Eastern seaboard/WA/Kangaroo Island?
-## Analyst:                           # Name of person who implemented workflow
-## Reviewer:                          # Name of person who checked workflow
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
-## Date completed:                    # Date workflow is finished (or last updated?)
+## Species:Philoria sphagnicola
+## Guild:Frogs
+## Region:NSW
+## Analyst:A Hao
+## Reviewer:D Wilkinson
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records:163
+## Number of background points:9758
+## Type of background points:random
+## Date completed:30/06/2020
+## Any other comments:Note the altered data getting workflow to accommodate synonyms
 
 species <- "Philoria sphagnicola"
 
