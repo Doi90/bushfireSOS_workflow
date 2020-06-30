@@ -33,18 +33,18 @@
 
 ## Species:Coeranoscincus reticulatus
 ## Guild:Reptiles
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
+## Region: NSW QLD
+## Analyst:A HAO
+## Reviewer:R VALAVI
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records:101
+## Number of background points:9968
+## Type of background points:random
+## Date completed:30/06/2020
 ## Any other comments:
 
 species <- "Coeranoscincus reticulatus"
