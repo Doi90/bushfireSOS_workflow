@@ -41,9 +41,9 @@
 ## Built SDM: Y/N                     # YES
 ## Data available: PO/PA              # PO
 ## Type of SDM: PresBG/PresAbs/Hybrid # PresBG
-## Date completed:                    # 29-06-2020
+## Date completed:                    # 30-06-2020
 ## Number of occurence                # 94 points
-## Comment                            #
+## Comment                            # random BG points
 
 species <- "Calyptotis ruficauda"
 
@@ -102,7 +102,7 @@ env_data <- bushfireSOS::load_env_data(stack_file = "../../bushfireResponse_data
 #########################
 
 # Generate our background points
-
+tm <- Sys.time()
 spp_data <- bushfireSOS::background_points(species = species,
                                            spp_data = spp_data,
                                            guild = guild,
@@ -110,6 +110,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            background_group = "vertebrates",
                                            bias_layer = "../../bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
+Sys.time() - tm
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
