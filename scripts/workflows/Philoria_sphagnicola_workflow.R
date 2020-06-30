@@ -31,25 +31,21 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## Species:                           # Scientific names?
+## Guild:                             # Or whatever we want to call our groups
+## Region:                            # Eastern seaboard/WA/Kangaroo Island?
+## Analyst:                           # Name of person who implemented workflow
+## Reviewer:                          # Name of person who checked workflow
+## SDM Required: Y/N                  # Retain option to indicate method
+## Used existing SDM: Y/N             # Retain option to indicate method
+## Built SDM: Y/N                     # Retain option to indicate method
+## Data available: PO/PA              # Retain option to indicate method
+## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
+## Date completed:                    # Date workflow is finished (or last updated?)
 
-species <- ""
+species <- "Philoria sphagnicola"
 
-guild <- ""
+guild <- "Frogs"
 
 #####################
 ### Load Packages ###
@@ -69,11 +65,21 @@ library(bushfireSOS)
 ## Presence background data
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               region = c("VIC", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+#handling NSW differently to read in different name and not have CoordCleaner treat them as separate species
+spp_data_NSW <- bushfireSOS::load_pres_bg_data_AUS(species = species,
+                                               region = "NSW",
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "",#email off to prevent GBIF or ALA runs
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data$data <- rbind(spp_data$data,spp_data_NSW$data)
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -93,7 +99,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles",
+env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles/",
                                        region = region)
 
 #########################
@@ -109,12 +115,6 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
-
-## Check that there are >= 20 presences (1s) and an appropriate number of
-## background points (1000 * number of states with data for target group,
-## or 10,000 for random)
-
-table(spp_data$data$Value)
 
 #######################
 ### Data Extraction ###
@@ -133,6 +133,8 @@ saveRDS(spp_data,
 
 # Do we have >=20 presence records?
 # Y/N
+
+nrow(spp_data$data[spp_data$data$Value == 1, ])
 
 # Can we fit an SDM for this species?
 # Y/N 
@@ -185,8 +187,6 @@ saveRDS(model,
 
 # Perform appropriate model checking
 # Ensure features is set identical to that of the above full model
-# If Boyce Index returns NAs then re-run the cross-validation with
-#  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
@@ -211,9 +211,8 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
-
-mapview::mapview(prediction)
+                            gsub(" ", "_", species)),
+                    overwrite=TRUE)
 
 #################
 ### Meta Data ###
