@@ -47,7 +47,7 @@
 ## Date completed: 1/07/2020
 ## Any other comments: Lots of records removed from VIC, only 4 remain so never made it to modelling
 
-species <- "Litoria_spenceri"
+species <- "Litoria spenceri"
 
 guild <- "Frogs"
 
