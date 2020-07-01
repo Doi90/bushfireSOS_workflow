@@ -31,20 +31,20 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
+## Species: Pseudemoia cryodroma
+## Guild: Reptiles
+## Region: VIC/NSW
+## Analyst: David
+## Reviewer: Roozbeh
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records: 63
+## Number of background points: 10000
+## Type of background points: Random
+## Date completed: 1/7/20
 ## Any other comments:
 
 species <- "Pseudemoia cryodroma"
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
@@ -211,7 +211,8 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)),
+                    overwrite = TRUE)
 
 mapview::mapview(prediction)
 
