@@ -36,7 +36,7 @@
 ## Region: NSW (I think there should be data from QLD - waiting for sensitive data request)
 ## Analyst:Darren Southwell
 ## Reviewer: David Wilkinson @Doi90
-## SDM Required: Y/N
+## SDM Required: N
 ## Used existing SDM: N
 ## Built SDM: Y
 ## Data available: PO
