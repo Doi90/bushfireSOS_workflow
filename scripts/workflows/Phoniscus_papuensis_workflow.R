@@ -43,7 +43,7 @@
 ## Type of SDM: PresBG
 ## Number of presence records: 384
 ## Number of background points: 8934
-## Type of background points:
+## Type of background points: Target group
 ## Date completed: 1/07/2020
 ## Any other comments:
 
