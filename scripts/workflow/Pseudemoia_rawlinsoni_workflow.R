@@ -42,7 +42,7 @@
 ## Data available: PO/PA              # PO
 ## Type of SDM: PresBG/PresAbs/Hybrid # PresBG
 ## Date completed:                    # 30-06-2020
-## Number of occurrence               # 82
+## Number of occurrence               # 74
 ## Comment                            # random BG points
 
 species <- "Pseudemoia rawlinsoni"
