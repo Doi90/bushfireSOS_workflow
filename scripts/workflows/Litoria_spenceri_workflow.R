@@ -36,7 +36,7 @@
 ## Region: NSW (but also occurs in VIC - these records were deleted)
 ## Analyst: Darren Southwell
 ## Reviewer: David Wilkinson @Doi90
-## SDM Required: Y
+## SDM Required: Yes
 ## Used existing SDM: 
 ## Built SDM: N
 ## Data available: PO
