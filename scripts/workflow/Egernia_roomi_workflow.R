@@ -35,15 +35,15 @@
 ## Guild:                             # Reptiles
 ## Region:                            # Eastern seaboard/WA/Kangaroo Island?
 ## Analyst:                           # Roozbeh Valavi
-## Reviewer:                          # Name of person who checked workflow
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
+## Reviewer:                          # Darren
+## SDM Required: Y/N                  # NO
+## Used existing SDM: Y/N             # NO
+## Built SDM: Y/N                     # NO
+## Data available: PO/PA              # NA
+## Type of SDM: PresBG/PresAbs/Hybrid # NA
 ## Date completed:                    # 01-07-2020
-## Number of occurrence               # 
-## Comment                            #
+## Number of occurrence               # No data are available
+## Comment                            # 
 
 species <- "Egernia roomi"
 
