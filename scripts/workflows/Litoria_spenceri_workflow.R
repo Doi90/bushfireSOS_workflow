@@ -31,25 +31,25 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
+## Species: Litoria_spenceri
+## Guild: Frogs
+## Region: NSW (but also occurs in VIC - these records were deleted)
+## Analyst: Darren Southwell
+## Reviewer: David Wilkinson @Doi90
+## SDM Required: Y
+## Used existing SDM: 
+## Built SDM: N
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records: 4 (not enough records)
 ## Number of background points:
 ## Type of background points:
-## Date completed:
-## Any other comments:
+## Date completed: 1/07/2020
+## Any other comments: Lots of records removed from VIC, only 4 remain so never made it to modelling
 
-species <- ""
+species <- "Litoria_spenceri"
 
-guild <- ""
+guild <- "Frogs"
 
 #####################
 ### Load Packages ###
@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "darren.southwell@unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
