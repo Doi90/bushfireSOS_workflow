@@ -36,7 +36,7 @@
 ## Region: NSW, Jervis Bay
 ## Analyst: Darren Southwell
 ## Reviewer: Adam Smart
-## SDM Required: Y
+## SDM Required: Yes
 ## Used existing SDM: N
 ## Built SDM: Y
 ## Data available: PO
