@@ -33,7 +33,7 @@
 
 ## Species:                           # Saltaurius wyberba
 ## Guild:                             # Reptiles
-## Region:                            # NSW. QLD
+## Region:                            # NSW, QLD
 ## Analyst:                           # Roozbeh Valavi
 ## Reviewer:                          # Darren Southwell @dsouthwell
 ## SDM Required: Y/N                  # NA
@@ -41,7 +41,9 @@
 ## Built SDM: Y/N                     # NO
 ## Data available: PO/PA              # NA
 ## Type of SDM: PresBG/PresAbs/Hybrid # NA
-## Date completed:                    # 24-06-2020
+## Date completed:                    # 01-07-2020
+## Number of occurrence               # 11
+## Comment                            #
 
 species <- "Saltaurius wyberba"
 
