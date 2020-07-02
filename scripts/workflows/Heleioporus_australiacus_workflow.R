@@ -33,7 +33,7 @@
 
 ## Species:Heleioporus australiacus
 ## Guild:Frogs
-## Region: NSW, Jervis Bay
+## Region: VIC, NSW, Jervis Bay
 ## Analyst: Darren Southwell
 ## Reviewer: Adam Smart
 ## SDM Required: Yes
@@ -41,14 +41,13 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 300
+## Number of presence records: 307
 ## Number of background points: 10000
 ## Type of background points: random
 ## Date completed: 1/06/2020
-## Any other comments: Boyce index of 0.5116. This species extends into Victoria. Not sure why there's no
-## records for there. Might need to revisit, or predict into VIC too.
+## Any other comments: Had to change features to lqp cause it failed the evaluation stage
 
-species <- "Heleioporus_australiacus"
+species <- "Heleioporus australiacus"
 
 guild <- "Frogs"
 
@@ -166,7 +165,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lqp")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -193,7 +192,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "default")
+                                          features = "lqp")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
