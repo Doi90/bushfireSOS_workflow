@@ -70,7 +70,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "rvalavi@student.unimelb.edu.au",
-                                               file.vic = "../../bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -90,7 +90,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "../../bushfireResponse_data/spatial_layers/bushfire_terre_layers_250_AA.tif",
+env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################
@@ -104,7 +104,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            guild = guild,
                                            region = region,
                                            background_group = "vertebrates",
-                                           bias_layer = "../../bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
+                                           bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
@@ -121,7 +121,7 @@ spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
                                              env_data = env_data)
 
 saveRDS(spp_data,
-        sprintf("../../bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
+        sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
                 gsub(" ", "_", species)))
 
 #####################
@@ -165,7 +165,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         features = "default")
 
 saveRDS(model,
-        sprintf("../../bushfireResponse_data/outputs/model/model_%s.rds",
+        sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
                 gsub(" ", "_", species)))
 
 ## Presence absence model
@@ -192,7 +192,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           features = "default")
 
 saveRDS(model_eval,
-        sprintf("../../bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
+        sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
                 gsub(" ", "_", species)))
 
 ########################
@@ -203,7 +203,7 @@ saveRDS(model_eval,
 
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
-                                            mask = "../../bushfireResponse_data/spatial_layers/NIAFED_v20200428",
+                                            mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428",
                                             parallel = FALSE)
 
 raster::writeRaster(prediction,
