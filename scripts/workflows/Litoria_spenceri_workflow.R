@@ -41,11 +41,11 @@
 ## Built SDM: N
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 4 (not enough records)
-## Number of background points:
-## Type of background points:
+## Number of presence records: 68
+## Number of background points: 10000
+## Type of background points: Random
 ## Date completed: 1/07/2020
-## Any other comments: Lots of records removed from VIC, only 4 remain so never made it to modelling
+## Any other comments: I originally had an underscore in the species name, so not all records were collected. The sdm has now been re-run without the underscore
 
 species <- "Litoria spenceri"
 
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# Y/N
+# N
 
 # If yes, how should we ensure its suitable for our purposes?
 
