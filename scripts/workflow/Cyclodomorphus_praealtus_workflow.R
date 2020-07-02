@@ -33,16 +33,16 @@
 
 ## Species:                           # Cyclodomorphus praealtus
 ## Guild:                             # Reptiles
-## Region:                            # 
+## Region:                            # VIC, NSW
 ## Analyst:                           # Roozbeh Valavi
 ## Reviewer:                          # August Hao @AugustHao
-## SDM Required: Y/N                  # Retain option to indicate method
-## Used existing SDM: Y/N             # Retain option to indicate method
-## Built SDM: Y/N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
-## Date completed:                    # 01-07-2020
-## Number of occurrence               # 
+## SDM Required: Y/N                  # NO
+## Used existing SDM: Y/N             # NO
+## Built SDM: Y/N                     # NO
+## Data available: PO/PA              # PO
+## Type of SDM: PresBG/PresAbs/Hybrid # NA
+## Date completed:                    # 02-07-2020
+## Number of occurrence               # 6
 ## Comment                            #
 
 species <- "Cyclodomorphus praealtus"
