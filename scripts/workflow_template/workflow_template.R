@@ -31,25 +31,25 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: Euastacus jagara
-## Guild: Spiny Crayfish
-## Region: QLD
-## Analyst: David
-## Reviewer: August
-## SDM Required: Y
-## Used existing SDM: Y
-## Built SDM: N
-## Data available: PO
+## Species:
+## Guild:
+## Region:
+## Analyst:
+## Reviewer:
+## SDM Required: Y/N
+## Used existing SDM: Y/N
+## Built SDM: Y/N
+## Data available: PO/PA
 ## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records: 2
-## Number of background points: NA
-## Type of background points: NA
-## Date completed: 2/7/20
-## Any other comments: Only ~10 records total, with rounded coordinates
+## Number of presence records:
+## Number of background points:
+## Type of background points:
+## Date completed:
+## Any other comments:
 
-species <- "Euastacus jagara"
+species <- ""
 
-guild <- "Spiny crayfish"
+guild <- ""
 
 #####################
 ### Load Packages ###
@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
