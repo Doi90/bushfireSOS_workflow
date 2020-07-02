@@ -33,7 +33,7 @@
 
 ## Species: Mixophyes_balbus
 ## Guild: Frogs
-## Region: NSW (I think there should be data from QLD - waiting for sensitive data request)
+## Region: NSW, VIC
 ## Analyst:Darren Southwell
 ## Reviewer: David Wilkinson @Doi90
 ## SDM Required: N
@@ -41,13 +41,13 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 72
+## Number of presence records: 74
 ## Number of background points: 10000
 ## Type of background points: Random background
 ## Date completed: 1/07/2020
 ## Any other comments: Might need to be re-run with QLD data (if we get it) or predicted into QLD too
 
-species <- "Mixophyes_balbus"
+species <- "Mixophyes balbus"
 
 guild <- "Frogs"
 
