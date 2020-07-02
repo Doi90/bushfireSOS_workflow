@@ -41,13 +41,13 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 91
+## Number of presence records: 89
 ## Number of background points:10000
 ## Type of background points: Random
 ## Date completed: 30/06/2020
 ## Any other comments:
 
-species <- "Pseudophryne_pengilleyi"
+species <- "Pseudophryne pengilleyi"
 
 guild <- "Frogs"
 
