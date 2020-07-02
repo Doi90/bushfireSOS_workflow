@@ -38,7 +38,7 @@
 ## Reviewer: David Wilkinson @Doi90
 ## SDM Required: Yes
 ## Used existing SDM: 
-## Built SDM: N
+## Built SDM: No
 ## Data available: PO
 ## Type of SDM: PresBG
 ## Number of presence records: 68
