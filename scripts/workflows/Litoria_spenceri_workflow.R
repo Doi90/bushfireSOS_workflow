@@ -33,12 +33,12 @@
 
 ## Species: Litoria_spenceri
 ## Guild: Frogs
-## Region: NSW (but also occurs in VIC - these records were deleted)
+## Region: NSW/VIC
 ## Analyst: Darren Southwell
 ## Reviewer: David Wilkinson @Doi90
 ## SDM Required: Yes
-## Used existing SDM: 
-## Built SDM: No
+## Used existing SDM: N 
+## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
 ## Number of presence records: 68
