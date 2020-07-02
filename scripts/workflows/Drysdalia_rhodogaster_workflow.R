@@ -47,7 +47,7 @@
 ## Date completed: 30/06/2020
 ## Any other comments:
 
-species <- "Drysdalia_rhodogaster"
+species <- "Drysdalia rhodogaster"
 
 guild <- "Reptiles"
 
