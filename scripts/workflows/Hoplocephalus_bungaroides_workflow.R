@@ -41,13 +41,13 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 199
+## Number of presence records: 202
 ## Number of background points: 10000
 ## Type of background points: random
 ## Date completed: 30/6/2020
 ## Any other comments:
 
-species <- "Hoplocephalus_bungaroides"
+species <- "Hoplocephalus bungaroides"
 
 guild <- "Reptiles"
 
