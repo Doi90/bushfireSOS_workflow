@@ -38,13 +38,13 @@
 ## Reviewer: David
 ## SDM Required: Y
 ## Used existing SDM: N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
 ## Number of presence records: 1675
 ## Number of background points: 155541
 ## Type of background points: Target group
-## Date completed:
+## Date completed: 3/7/20
 ## Any other comments:
 
 species <- "Antechinus mimetes"
