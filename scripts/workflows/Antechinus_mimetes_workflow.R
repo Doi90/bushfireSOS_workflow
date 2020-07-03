@@ -31,25 +31,25 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
+## Species: Antechinus mimetes
+## Guild: Mammals
+## Region: VIC NSW ACT
+## Analyst: Adam
+## Reviewer: David
+## SDM Required: Y
+## Used existing SDM: N
 ## Built SDM: Y/N
 ## Data available: PO/PA
 ## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
+## Number of presence records: 1675
+## Number of background points: 155541
+## Type of background points: Target group
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Antechinus mimetes"
 
-guild <- ""
+guild <- "Mammals"
 
 #####################
 ### Load Packages ###
@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "asmart1@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# Y/N
+# NA
 
 # If yes, how should we ensure its suitable for our purposes?
 
