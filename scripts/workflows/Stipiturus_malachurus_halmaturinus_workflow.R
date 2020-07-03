@@ -33,7 +33,7 @@
 
 ## Species: Stipiturus malachurus halmaturinus
 ## Guild: Birds
-## Region:
+## Region: SA
 ## Analyst: Adam
 ## Reviewer: David
 ## SDM Required: Y/N
@@ -45,7 +45,7 @@
 ## Number of background points:
 ## Type of background points:
 ## Date completed:
-## Any other comments:
+## Any other comments: Removed outlier in NSW. Plot just for SA. k = 4 for model validation.
 
 species <- "Stipiturus malachurus halmaturinus"
 
@@ -69,7 +69,7 @@ library(bushfireSOS)
 ## Presence background data
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               region = c("VIC", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "asmart1@student.unimelb.edu.au",
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# Y/N
+# N
 
 # If yes, how should we ensure its suitable for our purposes?
 
@@ -190,7 +190,7 @@ saveRDS(model,
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
-                                          k = 5,
+                                          k = 4,
                                           parallel = FALSE,
                                           features = "default")
 
