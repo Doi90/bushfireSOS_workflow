@@ -33,19 +33,19 @@
 
 ## Species: Euastacus suttoni
 ## Guild: Spiny crayfish
-## Region:
+## Region: NSW/QLD
 ## Analyst: David
 ## Reviewer: Adam
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
 ## Number of presence records: 26
 ## Number of background points: 10000
 ## Type of background points: random
-## Date completed:
-## Any other comments: Features set to lq
+## Date completed: 3/7/20
+## Any other comments: Features set to lq. Prediction seems overtly wide
 
 species <- "Euastacus suttoni"
 
