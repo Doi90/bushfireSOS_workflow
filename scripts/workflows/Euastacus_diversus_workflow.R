@@ -33,18 +33,18 @@
 
 ## Species: Euastacus diversus
 ## Guild: Spiny crayfish
-## Region:
+## Region: VIC
 ## Analyst: David
 ## Reviewer: August
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
 ## Number of presence records: 53 
 ## Number of background points: 10000
 ## Type of background points: random
-## Date completed:
+## Date completed: 3/7/20
 ## Any other comments:
 
 species <- "Euastacus diversus"
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
