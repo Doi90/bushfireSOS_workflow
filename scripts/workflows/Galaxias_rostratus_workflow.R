@@ -41,11 +41,11 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 63
-## Number of background points: 10000
+## Number of presence records: 56
+## Number of background points: 9938
 ## Type of background points: random
-## Date completed:
-## Any other comments:
+## Date completed: 5/7/20
+## Any other comments: Prediction needs masking to streams
 
 species <- "Galaxias rostratus"
 
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
