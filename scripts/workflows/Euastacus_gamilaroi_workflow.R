@@ -33,19 +33,20 @@
 
 ## Species: Euastacus gamilaroi
 ## Guild: Spiny crayfish
-## Region:
+## Region: NSW
 ## Analyst: David
 ## Reviewer: August
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records: 22
+## Number of background points: 9932
+## Type of background points: random
+## Date completed: 6/7/20
+## Any other comments: Cannot evaluate Boyce Index, too narrow of an 
+##    environmental range. Also had to reduce features to "lq" only
 
 species <- "Euastacus gamilaroi"
 
@@ -165,7 +166,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lq")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -192,7 +193,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "lqp")
+                                          features = "lq")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
