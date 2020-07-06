@@ -31,12 +31,12 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
+## Species: Calyptorhynchus lathami lathami
+## Guild: Birds
+## Region: SA
+## Analyst: Adam
+## Reviewer: Roozbeh
+## SDM Required: Y
 ## Used existing SDM: Y/N
 ## Built SDM: Y/N
 ## Data available: PO/PA
