@@ -37,15 +37,15 @@
 ## Analyst: Adam
 ## Reviewer: August
 ## SDM Required: Y
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
 ## Number of presence records: 635
 ## Number of background points: 17159
 ## Type of background points: Target group
-## Date completed:
-## Any other comments: Used "lpq" as model to complex to fit with default settings.
+## Date completed: 7/7/20
+## Any other comments: Used "lpq" as model to complex to fit with default settings. Some issue with the prediction, heavily weighted inland possibly due to coastal bias of background points.
 
 species <- "Anthochaera phrygia"
 
