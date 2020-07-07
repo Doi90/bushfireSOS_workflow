@@ -33,7 +33,7 @@
 
 ## Species: Anthochaera phrygia
 ## Guild: Birds
-## Region:
+## Region: "VIC" "NSW" "QLD" "ACT" 
 ## Analyst: Adam
 ## Reviewer: August
 ## SDM Required: Y
@@ -41,15 +41,15 @@
 ## Built SDM: Y/N
 ## Data available: PO/PA
 ## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
+## Number of presence records: 635
+## Number of background points: 17159
+## Type of background points: Target group
 ## Date completed:
-## Any other comments:
+## Any other comments: Used "lpq" as model to complex to fit with default settings.
 
-species <- ""
+species <- "Anthochaera phrygia"
 
-guild <- ""
+guild <- "Birds"
 
 #####################
 ### Load Packages ###
@@ -72,11 +72,11 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "asmart1@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
-
+region<- region[-5] #remove SA
 ## Presence absence data
 
 # spp_data <- bushfireSOS::load_pres_abs_data(species,
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# Y/N
+# NA
 
 # If yes, how should we ensure its suitable for our purposes?
 
@@ -165,7 +165,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lqp")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -192,7 +192,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "default")
+                                          features = "lqp")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
