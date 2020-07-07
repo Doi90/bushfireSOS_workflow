@@ -41,11 +41,11 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## Number of presence records: 77 
+## Number of background points: 10000
+## Type of background points: Random
+## Date completed:7/7/20
+## Any other comments: Output looks OK. Some prediction on mainland (minimal).
 
 species <- "Tachyglossus aculeatus multiaculeatus"
 
@@ -85,7 +85,7 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 ## Preliminary presence records check
 ## If <20 can end workflow here
 
-nrow(spp_data$data)
+nrow(spp_data$data) #79 records
 
 ###############################
 ### Load Environmental Data ###
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# Y/N
+# NA
 
 # If yes, how should we ensure its suitable for our purposes?
 
@@ -190,7 +190,7 @@ saveRDS(model,
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
-                                          k = 5,
+                                          k = 4,
                                           parallel = FALSE,
                                           features = "default")
 
