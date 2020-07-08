@@ -41,8 +41,8 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 270
-## Number of background points: 9948
+## Number of presence records: 701
+## Number of background points: 9949
 ## Type of background points: random
 ## Date completed: 08-07-2020
 ## Any other comments: 
