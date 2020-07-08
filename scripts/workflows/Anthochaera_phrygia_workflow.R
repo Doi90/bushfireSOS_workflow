@@ -42,10 +42,10 @@
 ## Data available: PO
 ## Type of SDM: PresBG
 ## Number of presence records: 635
-## Number of background points: 17159
-## Type of background points: Target group
+## Number of background points: 10000
+## Type of background points: Random 
 ## Date completed: 7/7/20
-## Any other comments: Used "lpq" as model to complex to fit with default settings. Some issue with the prediction, heavily weighted inland possibly due to coastal bias of background points.
+## Any other comments: Used "lpq" as model to complex to fit with default settings. Some issue with the prediction, heavily weighted inland possibly due to coastal bias of background points. Rerun as rndom background.
 
 species <- "Anthochaera phrygia"
 
@@ -108,7 +108,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 20000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
