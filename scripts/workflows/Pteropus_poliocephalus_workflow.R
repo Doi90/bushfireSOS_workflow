@@ -217,7 +217,7 @@ mapview::mapview(prediction)
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)), overwrite=T)
 
 #################
 ### Meta Data ###
