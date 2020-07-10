@@ -33,7 +33,7 @@
 
 ## Species: Pezoporus wallicus wallicus
 ## Guild: Birds
-## Region: NSW, QLD, TAS, SA
+## Region: NSW, QLD, TAS, SA, VIC
 ## Analyst: Roozbeh
 ## Reviewer: Adam
 ## SDM Required: Y
@@ -79,7 +79,7 @@ spp_data
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 cat(region, sep = ", ", "\n")
 
-region <- c("NSW", "QLD", "TAS")
+region <- c("NSW", "QLD", "TAS", "VIC")
 
 ## Presence absence data
 
