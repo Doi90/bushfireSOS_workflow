@@ -41,10 +41,10 @@
 ## Built SDM: Y/N
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 492
-## Number of background points: 10668 
-## Type of background points: Target group
-## Date completed: 10/07/2020
+## Number of presence records: 491
+## Number of background points: 9955
+## Type of background points: Random
+## Date completed: 13/07/2020
 ## Any other comments: Changing from target group to random improved predictions
 
 species <- "Menura alberti"
