@@ -41,12 +41,11 @@
 ## Built SDM: Y/N
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 419
+## Number of presence records: 492
 ## Number of background points: 10668 
 ## Type of background points: Target group
 ## Date completed: 10/07/2020
-## Any other comments: features changes to lpq. This is a very range restricted species. This model over-predicted
-## up the coast of QLD - we might need to revisit with some spatial term.
+## Any other comments: Changing from target group to random improved predictions
 
 species <- "Menura alberti"
 
@@ -73,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "darren.southwell@unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -109,7 +108,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 20000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
@@ -166,7 +165,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "lqp")
+                                        features = "default")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -193,17 +192,10 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "lqp")
+                                          features = "default")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
-                gsub(" ", "_", species)))
-
-########################
-### Model Prediction ###
-########################
-
-# Perform appropriate prediction
 
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
@@ -215,6 +207,13 @@ raster::writeRaster(prediction,
                             gsub(" ", "_", species)))
 
 mapview::mapview(prediction)
+                gsub(" ", "_", species)))
+
+########################
+### Model Prediction ###
+########################
+
+# Perform appropriate prediction
 
 #################
 ### Meta Data ###
