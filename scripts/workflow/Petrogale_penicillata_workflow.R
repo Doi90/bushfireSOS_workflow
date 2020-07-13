@@ -41,10 +41,10 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 683
-## Number of background points: 16423
-## Type of background points: TGB
-## Date completed: 06-07-2020
+## Number of presence records: 674
+## Number of background points: 9966
+## Type of background points: random
+## Date completed: 13-07-2020
 ## Any other comments:
 
 species <- "Petrogale penicillata"
@@ -110,13 +110,11 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 1e10)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
 ## or 10,000 for random)
-
-table(spp_data$data$Value)
 
 #######################
 ### Data Extraction ###
@@ -124,6 +122,12 @@ table(spp_data$data$Value)
 
 spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
                                              env_data = env_data)
+
+table(spp_data$data$Value)
+# spp_data$data <- spp_data$data[-which(spp_data$data$Origin == 'ALA' & spp_data$data$ID == 41),]
+# spp_data$data <- spp_data$data[-which(spp_data$data$Origin == 'ALA' & spp_data$data$ID == 222),]
+
+bushfireSOS::map_sp_data(spp_data = spp_data, only_presences = TRUE)
 
 saveRDS(spp_data,
         sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
@@ -218,7 +222,8 @@ mapview::mapview(prediction)
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)),
+                    overwrite = TRUE)
 
 #################
 ### Meta Data ###
