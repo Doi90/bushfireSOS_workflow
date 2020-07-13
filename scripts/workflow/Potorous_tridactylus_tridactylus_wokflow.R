@@ -34,7 +34,7 @@
 ## Species: Potorous tridactylus tridactylus
 ## Guild: Mammals
 ## Region: NSW, QLD
-## Analyst: Roozbeh
+## Analyst: August
 ## Reviewer: Adam
 ## SDM Required: Y
 ## Used existing SDM: N
@@ -42,9 +42,9 @@
 ## Data available: PO
 ## Type of SDM: PresBG
 ## Number of presence records: 58
-## Number of background points: 8934
-## Type of background points: TGB
-## Date completed: 05-07-2020
+## Number of background points: 10000
+## Type of background points: random
+## Date completed: 13-07-2020
 ## Any other comments:
 
 species <- "Potorous tridactylus tridactylus"
@@ -72,12 +72,15 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "rvalavi@student.unimelb.edu.au",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 print(region)
+
+#note the NSW data are scattered, possible naming issue here
+
 
 ## Presence absence data
 
@@ -110,7 +113,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 1000000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
@@ -166,7 +169,7 @@ saveRDS(spp_data,
 model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
-                                        parallel = TRUE,
+                                        parallel = FALSE,
                                         ncors = 4,
                                         features = "lqp")
 
@@ -194,7 +197,7 @@ saveRDS(model,
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
-                                          parallel_tuning = TRUE, 
+                                          parallel_tuning = FALSE, 
                                           parallel = FALSE,
                                           ncors = 4,
                                           features = "lqp")
@@ -212,13 +215,13 @@ saveRDS(model_eval,
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
                                             mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428",
-                                            parallel = TRUE,
+                                            parallel = FALSE,
                                             ncors = 4)
 mapview::mapview(prediction)
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)), overwrite = TRUE)
 
 #################
 ### Meta Data ###
