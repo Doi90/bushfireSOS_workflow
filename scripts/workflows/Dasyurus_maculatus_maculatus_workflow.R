@@ -34,18 +34,18 @@
 ## Species:Dasyurus maculatus maculatus
 ## Guild: Mammals
 ## Region: Vic, NSW, QLD
-## Analyst: Darren Southwell
+## Analyst: Adam
 ## Reviewer: Roozbeh
 ## SDM Required: Y
 ## Used existing SDM: N
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 544
-## Number of background points: 9958
+## Number of presence records: 1657
+## Number of background points: 10000
 ## Type of background points: Random
-## Date completed: 10/7/2020
-## Any other comments: changed from target group to random
+## Date completed: 14/7/2020
+## Any other comments: Changed from target group to random. Output look good.
 
 species <- "Dasyurus maculatus maculatus"
 
@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "asmart1@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -108,7 +108,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 20000)
+                                           sample_min = 200000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y
 
 # If no, how should we create an output for Zonation?
 
@@ -211,7 +211,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)), overwrite=T)
 
 mapview::mapview(prediction)
 
