@@ -49,6 +49,8 @@
 
 species <- "Pezoporus wallicus wallicus"
 
+species1 <- "Pezoporus wallicus"
+
 guild <- "Birds"
 
 #####################
@@ -74,6 +76,17 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                map.directory = "outputs/data_outputs",
                                                email = "rvalavi@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = species1,
+                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                                save.map = FALSE,
+                                                map.directory = "outputs/data_outputs",
+                                                email = "rvalavi@student.unimelb.edu.au",
+                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data$data <- rbind(spp_data$data,
+                       spp_data1$data)
+
 spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -129,7 +142,7 @@ spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
 
 table(spp_data$data$Value)
 
-bushfireSOS::map_sp_data(spp_data = spp_data, only_presences = FALSE)
+bushfireSOS::map_sp_data(spp_data = spp_data, only_presences = TRUE)
 
 saveRDS(spp_data,
         sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
