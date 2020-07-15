@@ -49,6 +49,10 @@
 
 species <- "Potorous tridactylus tridactylus"
 
+species1 <- "Potorous tridactylus trisulcatus"
+
+species2 <- "Potorous tridactylus apicalis"
+
 guild <- "Mammals"
 
 #####################
@@ -74,6 +78,25 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                map.directory = "outputs/data_outputs",
                                                email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = species1,
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data2 <- bushfireSOS::load_pres_bg_data_AUS(species = species2,
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data$data <- rbind(spp_data$data,
+                       spp_data1$data,
+                       spp_data2$data)
+
 spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
