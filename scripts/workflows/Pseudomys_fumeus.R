@@ -34,18 +34,18 @@
 ## Species: Pseudomys fumeus
 ## Guild: Mammals
 ## Region: VIC/NSW/ACT/SA
-## Analyst: David
+## Analyst: Adam
 ## Reviewer: Darren  
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records: 235
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records: 321
 ## Number of background points: 15712
-## Type of background points: Target group
-## Date completed:
-## Any other comments:
+## Type of background points: RBG
+## Date completed: 15/7/20
+## Any other comments: Output looks good. Ran with lqp.
 
 species <- "Pseudomys fumeus"
 
@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "asmart1@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -108,7 +108,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 200000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
@@ -132,10 +132,10 @@ saveRDS(spp_data,
 #####################
 
 # Do we have >=20 presence records?
-# Y/N
+# Y
 
 # Can we fit an SDM for this species?
-# Y/N 
+# Y 
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# Y/N
+# NA
 
 # If yes, how should we ensure its suitable for our purposes?
 
@@ -165,7 +165,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lqp")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -192,7 +192,7 @@ model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
                                           parallel = FALSE,
-                                          features = "default")
+                                          features = "lqp")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -211,7 +211,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)) ,overwrite=T)
 
 mapview::mapview(prediction)
 
