@@ -34,17 +34,17 @@
 ## Species: Pezoporus wallicus wallicus
 ## Guild: Birds
 ## Region: NSW, QLD, TAS, SA, VIC
-## Analyst: Roozbeh
+## Analyst: August
 ## Reviewer: Adam
 ## SDM Required: Y
 ## Used existing SDM: N
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 701
-## Number of background points: 9949
+## Number of presence records: 1328
+## Number of background points: 9940
 ## Type of background points: random
-## Date completed: 08-07-2020
+## Date completed: 16-07-2020
 ## Any other comments: 
 
 species <- "Pezoporus wallicus wallicus"
@@ -74,14 +74,14 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "rvalavi@student.unimelb.edu.au",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = species1,
                                                 region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                 save.map = FALSE,
                                                 map.directory = "outputs/data_outputs",
-                                                email = "rvalavi@student.unimelb.edu.au",
+                                                email = "tianxiaoh@student.unimelb.edu.au",
                                                 file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 spp_data$data <- rbind(spp_data$data,
@@ -185,9 +185,9 @@ saveRDS(spp_data,
 model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
-                                        parallel = TRUE,
+                                        parallel = FALSE,
                                         ncors = 4,
-                                        features = "default")
+                                        features = "lqp")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -213,10 +213,10 @@ saveRDS(model,
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
-                                          parallel_tuning = TRUE, 
+                                          parallel_tuning = FALSE, 
                                           parallel = FALSE,
                                           ncors = 4,
-                                          features = "default")
+                                          features = "lqp")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -231,7 +231,7 @@ saveRDS(model_eval,
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
                                             mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428",
-                                            parallel = TRUE,
+                                            parallel = FALSE,
                                             ncors = 4)
 mapview::mapview(prediction)
 
