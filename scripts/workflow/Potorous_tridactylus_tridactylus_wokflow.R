@@ -41,10 +41,10 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 58
+## Number of presence records: 1028
 ## Number of background points: 10000
 ## Type of background points: random
-## Date completed: 13-07-2020
+## Date completed: 16-07-2020
 ## Any other comments:
 
 species <- "Potorous tridactylus tridactylus"
