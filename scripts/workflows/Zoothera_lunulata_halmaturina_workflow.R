@@ -41,13 +41,15 @@
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records:175
-## Number of background points:10000
+## Number of presence records:216
+## Number of background points:9771
 ## Type of background points:random
-## Date completed:08/07/2020
-## Any other comments:high AUC and low Boyce indicating model not predicting to presences well, possible underprediction?
+## Date completed:17/07/2020
+## Any other comments:rerun with KI data but no KI mask for background selection because species found on mainland too
 
 species <- "Zoothera lunulata halmaturina"
+
+species1 <- "Zoothera lunulata"
 
 guild <- "Birds"
 
@@ -75,6 +77,16 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
+spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = species1,
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "",
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+spp_data$data <- rbind(spp_data$data,
+                       spp_data1$data)
+
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
 ## Presence absence data
@@ -101,14 +113,14 @@ env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spati
 #########################
 
 # Generate our background points
-
+# Species has mainland population, no KI mask
 spp_data <- bushfireSOS::background_points(species = species,
                                            spp_data = spp_data,
                                            guild = guild,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 100000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
@@ -127,6 +139,8 @@ saveRDS(spp_data,
         sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
                 gsub(" ", "_", species)))
 
+map_sp_data(spp_data)
+table(spp_data$data$Value)
 #####################
 ### SDM Required? ###
 #####################
@@ -211,7 +225,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)), overwrite = TRUE)
 
 mapview::mapview(prediction)
 
