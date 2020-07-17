@@ -33,19 +33,19 @@
 
 ## Species: Stipiturus malachurus halmaturinus
 ## Guild: Birds
-## Region: SA
+## Region: KI
 ## Analyst: Adam
-## Reviewer: David
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments: Removed outlier in NSW. Plot just for SA. k = 4 for model validation.
+## Reviewer: Darren/David
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records: 103
+## Number of background points: 10000
+## Type of background points: RBG
+## Date completed:17/7/20
+## Any other comments: ran with 'lq'
 
 species <- "Stipiturus malachurus halmaturinus"
 
@@ -69,14 +69,14 @@ library(bushfireSOS)
 ## Presence background data
 
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = c("VIC", "QLD", "SA", "NT", "WA", "TAS"),
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "asmart1@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
-
+region<- "SA"
 ## Presence absence data
 
 # spp_data <- bushfireSOS::load_pres_abs_data(species,
@@ -135,7 +135,7 @@ saveRDS(spp_data,
 # Y
 
 # Can we fit an SDM for this species?
-# Y 
+# Y
 
 # If no, how should we create an output for Zonation?
 
@@ -144,7 +144,7 @@ saveRDS(spp_data,
 #########################
 
 # Can we use an existing SDM for this species?
-# N
+# NA
 
 # If yes, how should we ensure its suitable for our purposes?
 
@@ -165,7 +165,7 @@ model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
                                         parallel = FALSE,
-                                        features = "default")
+                                        features = "lq")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -190,9 +190,9 @@ saveRDS(model,
 
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
-                                          k = 4,
+                                          k = 5,
                                           parallel = FALSE,
-                                          features = "default")
+                                          features = "lq")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -211,7 +211,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)), overwrite=T)
 
 mapview::mapview(prediction)
 
