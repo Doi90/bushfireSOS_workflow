@@ -34,17 +34,17 @@
 ## Species: Phoniscus papuensis
 ## Guild: Mammals
 ## Region: QLD, NSW
-## Analyst: Darren Southwell
-## Reviewer: August Hao @AugustHao
+## Analyst: August Hao @AugustHaoDarren Southwell
+## Reviewer: Darren Southwell
 ## SDM Required: Y
 ## Used existing SDM: N
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records: 384
-## Number of background points: 8934
-## Type of background points: Target group
-## Date completed: 1/07/2020
+## Number of presence records: 383
+## Number of background points: 10000
+## Type of background points: random
+## Date completed: 13/07/2020
 ## Any other comments:
 
 species <- "Phoniscus papuensis"
@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "darren.southwell@unimelb.edu.au",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -108,7 +108,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 1000000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
@@ -211,7 +211,7 @@ prediction <- bushfireSOS::model_prediction(model = model,
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+                            gsub(" ", "_", species)), overwrite = TRUE)
 
 mapview::mapview(prediction)
 
