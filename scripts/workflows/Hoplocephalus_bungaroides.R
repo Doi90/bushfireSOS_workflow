@@ -43,7 +43,7 @@
 ## Type of SDM: PresBG # Retain option to indicate method
 ## Date completed: 27/6/2020                   # Date workflow is finished (or last updated?)
 
-species <- "Hoplocephalus_bungaroides"
+species <- "Hoplocephalus bungaroides"
 
 guild <- "Reptiles"
 
