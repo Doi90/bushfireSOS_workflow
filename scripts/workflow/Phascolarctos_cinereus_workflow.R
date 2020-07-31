@@ -72,7 +72,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "rvalavi@student.unimelb.edu.au",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 spp_data
 
@@ -130,9 +130,9 @@ spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
 ## or 10,000 for random)
 
 bushfireSOS::map_sp_data(spp_data = spp_data, only_presences = TRUE)
-
-spp_data$data <- spp_data$data[-which(spp_data$data$Origin == 'ALA' & spp_data$data$ID == 9551),]
-spp_data$data <- spp_data$data[-which(spp_data$data$Origin == 'GBIF' & spp_data$data$ID == 47557),]
+# 
+# spp_data$data <- spp_data$data[-which(spp_data$data$Origin == 'ALA' & spp_data$data$ID == 9551),]
+# spp_data$data <- spp_data$data[-which(spp_data$data$Origin == 'GBIF' & spp_data$data$ID == 47557),]
 
 table(spp_data$data$Value)
 
