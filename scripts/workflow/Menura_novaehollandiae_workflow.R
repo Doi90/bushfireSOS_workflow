@@ -72,17 +72,17 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "rvalavi@student.unimelb.edu.au",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 cat(region, sep = ", ", "\n")
 
-spp_data$data[1:5, 1:5]
-spp_data <- spp_data
-spp_data$data <- spp_data$data[- which.min(spp_data$data$Longitude),]
-map_sp_data(spp_data = spp_data, crs = 4326)
+# spp_data$data[1:5, 1:5]
+# spp_data <- spp_data
+# spp_data$data <- spp_data$data[- which.min(spp_data$data$Longitude),]
+# map_sp_data(spp_data = spp_data, crs = 4326)
 
 ## Presence absence data
 
@@ -115,7 +115,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 100000)
 
 
 #######################
