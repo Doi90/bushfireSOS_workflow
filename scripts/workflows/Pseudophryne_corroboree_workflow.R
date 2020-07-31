@@ -75,9 +75,10 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
+bushfireSOS::map_sp_data(spp_data = spp_data, crs = 4326)
+
 #the VIC point is likely error, delete
-spp_data$data <- spp_data$data[-44,]
-region <- bushfireSOS::species_data_get_state_character(spp_data$data)
+region <- "NSW"
 
 ## Presence absence data
 
