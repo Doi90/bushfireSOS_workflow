@@ -31,25 +31,29 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
+## Species: Gadopsis sp. nov. 'Western Victoria'
+## Guild: FIsh
 ## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
+## Analyst: David
+## Reviewer: August
+## SDM Required: Y
+## Used existing SDM: Y
+## Built SDM: N
 ## Data available: PO/PA
 ## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## Number of presence records: 0
+## Number of background points: NA
+## Type of background points: NA
+## Date completed: 5/7/20
+## Any other comments: Records for "River blackfish" but that includes way too many species.
 
-species <- ""
+# species <- "Gadopsis sp. nov. 'Western Victoria'"
+# species <- "Gadopsis sp. nov."
+# species <- "Gadopsis sp. nov"
+# species <- "Gadopsis sp nov"
+species <- "SW Victorian Blackfish"
 
-guild <- ""
+guild <- "Fish"
 
 #####################
 ### Load Packages ###
@@ -68,12 +72,12 @@ library(bushfireSOS)
 
 ## Presence background data
 
-spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
-                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
-                                               save.map = FALSE,
-                                               map.directory = "outputs/data_outputs",
-                                               email = "",
-                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+spp_data <- bushfireSOS::load_pres_bg_data_AUS_improper(species = species,
+                                                        region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                                        save.map = FALSE,
+                                                        map.directory = "outputs/data_outputs",
+                                                        email = "davidpw@student.unimelb.edu.au",
+                                                        file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 

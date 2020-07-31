@@ -31,31 +31,31 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## Species:                           # Litoria subglandulosa
+## Guild:                             # Frogs
+## Region:                            # NSW, QLD
+## Analyst:                           # Roozbeh Valavi
+## Reviewer:                          # Darren Southwell @dsouthwellw
+## SDM Required: Y/N                  # YES
+## Used existing SDM: Y/N             # NO
+## Built SDM: Y/N                     # YES
+## Data available: PO/PA              # PO
+## Type of SDM: PresBG/PresAbs/Hybrid # PO
+## Date completed:                    # 30-06-2020
+## Number of occurrence               # 66 points
+## Number of backgrounds              # 10000
+## Comment                            # random BG points
 
-species <- ""
+species <- "Litoria subglandulosa"
 
-guild <- ""
+guild <- "Frogs"
 
 #####################
 ### Load Packages ###
 #####################
 
 library(bushfireSOS)
+library(raster)
 
 #########################
 ### Load Species Data ###
@@ -72,10 +72,12 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "rvalavi@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
+print(region)
 
 ## Presence absence data
 
@@ -164,8 +166,9 @@ saveRDS(spp_data,
 model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                         tuneParam = TRUE,
                                         k = 5,
-                                        parallel = FALSE,
-                                        features = "default")
+                                        parallel = TRUE, 
+                                        ncors = 6,
+                                        features = "lq")
 
 saveRDS(model,
         sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -191,8 +194,10 @@ saveRDS(model,
 model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
                                           type = "po",
                                           k = 5,
+                                          parallel_tuning = TRUE, 
                                           parallel = FALSE,
-                                          features = "default")
+                                          ncors = 6,
+                                          features = "lq")
 
 saveRDS(model_eval,
         sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
@@ -207,13 +212,14 @@ saveRDS(model_eval,
 prediction <- bushfireSOS::model_prediction(model = model,
                                             env_data = env_data,
                                             mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428",
-                                            parallel = FALSE)
+                                            parallel = TRUE,
+                                            ncors = 6)
+mapview::mapview(prediction)
 
 raster::writeRaster(prediction,
                     sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
-
-mapview::mapview(prediction)
+                            gsub(" ", "_", species)),
+                    overwrite = TRUE)
 
 #################
 ### Meta Data ###

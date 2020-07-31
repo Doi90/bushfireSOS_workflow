@@ -31,25 +31,25 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
-## Reviewer:
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records:
-## Number of background points:
-## Type of background points:
-## Date completed:
-## Any other comments:
+## Species:Wollumbinia belli
+## Guild:Reptiles
+## Region:NSW
+## Analyst:A HAO
+## Reviewer:D Wilkinson
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records:135
+## Number of background points:9941
+## Type of background points:random
+## Date completed:30/06/2020
+## Any other comments:Note the addition of synonyms in the data getting process
 
-species <- ""
+species <- "Wollumbinia belli"
 
-guild <- ""
+guild <- "Reptiles"
 
 #####################
 ### Load Packages ###
@@ -72,8 +72,19 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+
+###BioNet has data under the name Myuchelys bellii, we will redo it here
+spp_data <- rbind(spp_data, 
+                  bushfireSOS::load_pres_bg_data_AUS(species = "Myuchelys bellii",
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "tianxiaoh@student.unimelb.edu.au",
+                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb"))
+
+spp_data$data <- rbind(spp_data[[1]],spp_data[[2]])
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
