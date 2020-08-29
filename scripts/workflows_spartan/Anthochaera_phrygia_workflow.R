@@ -31,29 +31,31 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: 
-## Guild: 
-## Region: 
-## Analyst: Roozbeh
-## Reviewer: 
-## SDM Required: Y/N
-## Used existing SDM: Y/N
-## Built SDM: Y/N
-## Data available: PO/PA
-## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records: 
-## Number of background points: 
-## Type of background points: 
-## Date completed: 06-07-2020
-## Any other comments: 
+## Species: Anthochaera phrygia
+## Guild: Birds
+## Region: "VIC" "NSW" "QLD" "ACT" 
+## Analyst: Adam
+## Reviewer: August
+## SDM Required: Y
+## Used existing SDM: N
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
+## Number of presence records: 635
+## Number of background points: 10000
+## Type of background points: Random 
+## Date completed: 7/7/20
+## Any other comments: Used "lpq" as model to complex to fit with default settings. Some issue with the prediction, heavily weighted inland possibly due to coastal bias of background points. Rerun as rndom background.
 
-species <- ""
+species <- "Anthochaera phrygia"
 
-guild <- ""
+guild <- "Birds"
 
 #####################
 ### Load Packages ###
 #####################
+
+.libPaths("/home/davidpw/R/lib/3.6")
 
 library(bushfireSOS)
 
@@ -72,13 +74,11 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "rvalavi@student.unimelb.edu.au",
+                                               email = "davidpw@student.unimelb.edu.au",
                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
-spp_data
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
-cat(region, sep = ", ")
-cat("\n")
+region<- region[region != "SA"] #remove SA
 
 ## Presence absence data
 
@@ -111,8 +111,13 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 100000)
 
+## Check that there are >= 20 presences (1s) and an appropriate number of
+## background points (1000 * number of states with data for target group,
+## or 10,000 for random)
+
+table(spp_data$data$Value)
 
 #######################
 ### Data Extraction ###
@@ -120,13 +125,6 @@ spp_data <- bushfireSOS::background_points(species = species,
 
 spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
                                              env_data = env_data)
-
-
-## Check that there are >= 20 presences (1s) and an appropriate number of
-## background points (1000 * number of states with data for target group,
-## or 10,000 for random)
-
-table(spp_data$data$Value)
 
 saveRDS(spp_data,
         sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
@@ -153,75 +151,109 @@ saveRDS(spp_data,
 
 # If yes, how should we ensure its suitable for our purposes?
 
-#####################
-### Model Fitting ###
-#####################
-
-# Fit an appropriate model type
-
-# Comment out unused methods instead of deleting them in case more
-# data becomes available at a later date
-
-## Presence only
-## Features should equal "default" on first attempt. Can reduce 
-## to "lqp", "lq", or "l" if model is too complex to fit 
-
-model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
-                                        tuneParam = TRUE,
-                                        k = 5,
-                                        parallel = TRUE,
-                                        ncors = 4,
-                                        features = "default")
-
-saveRDS(model,
-        sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
-                gsub(" ", "_", species)))
-
-## Presence absence model
-
-# model <- bushfireSOS::fit_pres_abs_model()
-
-## Hybrid model
-
-# model <- bushfireSOS::fit_hybrid_model()
-
-########################
-### Model Evaluation ###
-########################
-
-# Perform appropriate model checking
-# Ensure features is set identical to that of the above full model
-# If Boyce Index returns NAs then re-run the cross-validation with
-#  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
-
-model_eval <- bushfireSOS::cross_validate(spp_data = spp_data,
-                                          type = "po",
-                                          k = 5,
-                                          parallel_tuning = TRUE, 
-                                          parallel = FALSE,
-                                          ncors = 4,
-                                          features = "default")
-
-saveRDS(model_eval,
-        sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
-                gsub(" ", "_", species)))
-
-########################
-### Model Prediction ###
-########################
-
-# Perform appropriate prediction
-
-prediction <- bushfireSOS::model_prediction(model = model,
-                                            env_data = env_data,
-                                            mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428",
-                                            parallel = TRUE,
-                                            ncors = 4)
-mapview::mapview(prediction)
-
-raster::writeRaster(prediction,
-                    sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                            gsub(" ", "_", species)))
+if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
+  
+  print("At least 20 presence records")
+  
+  feature_options <- c("default",
+                       "lqp",
+                       "lq",
+                       "l")
+  
+  ########################
+  ### Model Evaluation ###
+  ########################
+  
+  # Perform appropriate model checking
+  # Ensure features is set identical to that of the above full model
+  # If Boyce Index returns NAs then re-run the cross-validation with
+  #  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
+  
+  for(feat in feature_options){
+    
+    features <- feat
+    
+    model_eval <- tryCatch(expr = bushfireSOS::cross_validate(spp_data = spp_data,
+                                                              type = "po",
+                                                              k = 5,
+                                                              parallel = FALSE,
+                                                              features = features),
+                           error = function(err){ return(NULL) })
+    
+    if(!is.null(model_eval)){
+      break()
+    }
+    
+  }
+  
+  if(!is.null(model_eval)){
+    
+    print("Model evaluation complete, fitting full model")
+    
+    saveRDS(model_eval,
+            sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
+                    gsub(" ", "_", species)))
+    
+    #####################
+    ### Model Fitting ###
+    #####################
+    
+    # Fit an appropriate model type
+    
+    # Comment out unused methods instead of deleting them in case more
+    # data becomes available at a later date
+    
+    ## Presence only
+    ## Features should equal "default" on first attempt. Can reduce 
+    ## to "lqp", "lq", or "l" if model is too complex to fit 
+    
+    model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
+                                            tuneParam = TRUE,
+                                            k = 5,
+                                            parallel = FALSE,
+                                            features = features)
+    
+    saveRDS(model,
+            sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
+                    gsub(" ", "_", species)))
+    
+    ## Presence absence model
+    
+    # model <- bushfireSOS::fit_pres_abs_model()
+    
+    ## Hybrid model
+    
+    # model <- bushfireSOS::fit_hybrid_model()
+    
+    ########################
+    ### Model Prediction ###
+    ########################
+    
+    # Perform appropriate prediction
+    
+    prediction <- bushfireSOS::model_prediction(model = model,
+                                                env_data = env_data,
+                                                mask = "bushfireResponse_data/spatial_layers/NIAFED_v20200428",
+                                                parallel = FALSE)
+    
+    raster::writeRaster(prediction,
+                        sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
+                                gsub(" ", "_", species)),
+                        overwrite = TRUE)
+    
+    mapview::mapview(prediction)
+    
+  } else{
+    
+    print("Model evaluation failed")
+    
+  } 
+  
+} else {
+  
+  print("Less than 20 records, no model fit")
+  
+}
 
 #################
 ### Meta Data ###
