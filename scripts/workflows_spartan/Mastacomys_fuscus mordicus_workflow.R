@@ -31,25 +31,25 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:Myuchelys purvisi
-## Guild:Reptiles
-## Region:NSW
-## Analyst:A HAO
-## Reviewer:D SOUTHWELL
+## Species: Mastacomys fuscus mordicus
+## Guild: Mammals
+## Region: VIC, NSW
+## Analyst: Roozbeh
+## Reviewer: August
 ## SDM Required: Y
 ## Used existing SDM: N
 ## Built SDM: Y
 ## Data available: PO
 ## Type of SDM: PresBG
-## Number of presence records:61
-## Number of background points:9948
-## Type of background points:random
-## Date completed:30/06/2020
-## Any other comments:River species, might need to rerun and treat as aquatic
+## Number of presence records: 236
+## Number of background points: 15541
+## Type of background points: TGB
+## Date completed: 06-07-2020
+## Any other comments: 
 
-species <- "Myuchelys purvisi"
+species <- "Mastacomys fuscus mordicus"
 
-guild <- "Reptiles"
+guild <- "Mammals"
 
 #####################
 ### Load Packages ###
@@ -181,7 +181,7 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
                                                               k = 5,
                                                               parallel = FALSE,
                                                               features = features),
-                           error = function(err){ return(NULL) })
+                           err = function(err){ return(NULL) })
     
     if(!is.null(model_eval)){
       break()

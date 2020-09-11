@@ -75,9 +75,14 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
                                                email = "davidpw@student.unimelb.edu.au",
-                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                               dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                               file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
+region <- region[region != "NT"]
 
 ## Presence absence data
 
@@ -95,7 +100,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles",
+env_data <- bushfireSOS::load_env_data(stack_dir = "bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################
@@ -110,7 +115,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 100000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,

@@ -78,23 +78,35 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "tianxiaoh@student.unimelb.edu.au",
-                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               email = "davidpw@student.unimelb.edu.au",
+                                               dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                               dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                               file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 ## NOTE for this one email is deliberately blank so I don't get main species from other databases
 spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = synonym,
-                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
-                                                save.map = FALSE,
-                                                map.directory = "outputs/data_outputs",
-                                                email = "",
-                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "",
+                                               dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                               dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                               file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
 ## NOTE for this one email is deliberately blank so I don't get main species from other databases
 spp_data2 <- bushfireSOS::load_pres_bg_data_AUS(species = synonym1,
-                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
-                                                save.map = FALSE,
-                                                map.directory = "outputs/data_outputs",
-                                                email = "",
-                                                file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                               save.map = FALSE,
+                                               map.directory = "outputs/data_outputs",
+                                               email = "",
+                                               dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                               dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                               file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
 spp_data$data <- rbind(spp_data$data,
                        spp_data1$data,
@@ -118,7 +130,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles",
+env_data <- bushfireSOS::load_env_data(stack_dir = "bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################
