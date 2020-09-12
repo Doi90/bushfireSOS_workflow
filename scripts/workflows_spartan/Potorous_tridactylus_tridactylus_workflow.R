@@ -81,7 +81,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                email = "davidpw@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
-                                               file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                               file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
                                                file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
                                                file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
@@ -92,7 +92,7 @@ spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = species1,
                                                 email = "davidpw@student.unimelb.edu.au",
                                                 dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                 dir.QLD = "bushfireResponse_data/spp_data_raw",
-                                                file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                                file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
                                                 file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
                                                 file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
@@ -103,7 +103,7 @@ spp_data2 <- bushfireSOS::load_pres_bg_data_AUS(species = species2,
                                                 email = "davidpw@student.unimelb.edu.au",
                                                 dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                 dir.QLD = "bushfireResponse_data/spp_data_raw",
-                                                file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                                file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
                                                 file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
                                                 file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 

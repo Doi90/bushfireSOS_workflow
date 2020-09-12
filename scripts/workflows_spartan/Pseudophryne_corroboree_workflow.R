@@ -77,13 +77,14 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                email = "davidpw@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
-                                               file.VIC = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb",
+                                               file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
                                                file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
                                                file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
+spp_data$data <- spp_data$data[spp_data$data$ID != 83, ]
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
-region <- "NSW"
+# region <- "NSW"
 
 ## Presence absence data
 
