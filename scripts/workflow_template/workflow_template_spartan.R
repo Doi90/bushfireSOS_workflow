@@ -51,6 +51,10 @@ species <- ""
 
 guild <- ""
 
+date_cutoff <- "1970-01-01"
+
+uncertainty_cutoff <- 1000
+
 #####################
 ### Load Packages ###
 #####################
@@ -77,9 +81,16 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                email = "davidpw@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               dir.WA = "bushfireResponse_data/spp_data_raw",
+                                               dir.SA = "bushfireResponse_data/spp_data_raw",
+                                               dir.VIC = "bushfireResponse_data/spp_data_raw",
                                                file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
                                                file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
-                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv",
+                                               date.cutoff = date_cutoff,
+                                               uncertainty.cutoff = uncertainty_cutoff)
+
+# spp_data$map
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -129,6 +140,9 @@ table(spp_data$data$Value)
 spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
                                              env_data = env_data)
 
+# bushfireSOS::map_sp_data(spp_data,
+#                          only_presences = TRUE)
+
 saveRDS(spp_data,
         sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
                 gsub(" ", "_", species)))
@@ -158,11 +172,11 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
   
   print("At least 20 presence records")
   
-  feature_options <- c("default",
-                       "lqp",
-                       "lq",
-                       "l")
-  
+  # feature_options <- c("default",
+  #                      "lqp",
+  #                      "lq",
+  #                      "l")
+  # 
   ########################
   ### Model Evaluation ###
   ########################
@@ -172,22 +186,23 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
   # If Boyce Index returns NAs then re-run the cross-validation with
   #  one fewer fold i.e. 5 > 4 > 3 > 2 > 1
   
-  for(feat in feature_options){
-    
-    features <- feat
-    
-    model_eval <- tryCatch(expr = bushfireSOS::cross_validate(spp_data = spp_data,
-                                                              type = "po",
-                                                              k = 5,
-                                                              parallel = FALSE,
-                                                              features = features),
-                           err = function(err){ return(NULL) })
-    
-    if(!is.null(model_eval)){
-      break()
-    }
-    
-  }
+  # for(feat in feature_options){
+  #   
+  #   features <- feat
+  #   
+  model_eval <- tryCatch(expr = bushfireSOS::cross_validate(spp_data = spp_data,
+                                                            type = "po",
+                                                            k = 5,
+                                                            # parallel = FALSE,
+                                                            filepath = sprintf("bushfireResponse_data/outputs/model/MaxEnt_outputs_CV/%s",
+                                                                               gsub(" ", "_", species))),
+                         err = function(err){ return(NULL) })
+  
+  #   if(!is.null(model_eval)){
+  #     break()
+  #   }
+  #   
+  # }
   
   if(!is.null(model_eval)){
     
@@ -213,8 +228,8 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
     model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                             tuneParam = TRUE,
                                             k = 5,
-                                            parallel = FALSE,
-                                            features = features)
+                                            filepath = sprintf("bushfireResponse_data/outputs/model/MaxEnt_outputs/%s",
+                                                               gsub(" ", "_", species)))
     
     saveRDS(model,
             sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
@@ -243,7 +258,14 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
                         sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
                                 gsub(" ", "_", species)))
     
-    mapview::mapview(prediction)
+    prediction_threshold <- bushfireSOS::predict_threshold(pred_ras = prediction,
+                                                           threshold = model_eval[3])
+    
+    raster::writeRaster(prediction_threshold,
+                        sprintf("bushfireResponse_data/outputs/predictions/predictions_%s_threshold.tif",
+                                gsub(" ", "_", species)))
+    
+    # mapview::mapview(prediction)
     
   } else{
     
