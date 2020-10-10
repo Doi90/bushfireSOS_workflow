@@ -256,14 +256,16 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
     
     raster::writeRaster(prediction,
                         sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                                gsub(" ", "_", species)))
+                                gsub(" ", "_", species)),
+                        overwrite = TRUE)
     
     prediction_threshold <- bushfireSOS::predict_threshold(pred_ras = prediction,
                                                            threshold = model_eval[3])
     
     raster::writeRaster(prediction_threshold,
                         sprintf("bushfireResponse_data/outputs/predictions/predictions_%s_threshold.tif",
-                                gsub(" ", "_", species)))
+                                gsub(" ", "_", species)),
+                        overwrite = TRUE)
     
     # mapview::mapview(prediction)
     
