@@ -51,7 +51,7 @@ species <- ""
 
 guild <- ""
 
-date_cutoff <- "1970-01-01"
+date_cutoff <- "1990-01-01"
 
 uncertainty_cutoff <- 1000
 
@@ -77,7 +77,7 @@ library(bushfireSOS)
 spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
-                                               map.directory = "outputs/data_outputs",
+                                               map.directory = "outputs_1990/data_outputs",
                                                email = "davidpw@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
@@ -144,7 +144,7 @@ spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
 #                          only_presences = TRUE)
 
 saveRDS(spp_data,
-        sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
+        sprintf("bushfireResponse_data/outputs_1990/spp_data/spp_data_%s.rds",
                 gsub(" ", "_", species)))
 
 #####################
@@ -194,7 +194,7 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
                                                             type = "po",
                                                             k = 5,
                                                             # parallel = FALSE,
-                                                            filepath = sprintf("bushfireResponse_data/outputs/model/MaxEnt_outputs_CV/%s",
+                                                            filepath = sprintf("bushfireResponse_data/outputs_1990/model/MaxEnt_outputs_CV/%s",
                                                                                gsub(" ", "_", species))),
                          err = function(err){ return(NULL) })
   
@@ -209,7 +209,7 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
     print("Model evaluation complete, fitting full model")
     
     saveRDS(model_eval,
-            sprintf("bushfireResponse_data/outputs/model_eval/model_eval_%s.rds",
+            sprintf("bushfireResponse_data/outputs_1990/model_eval/model_eval_%s.rds",
                     gsub(" ", "_", species)))
     
     #####################
@@ -228,11 +228,11 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
     model <- bushfireSOS::fit_pres_bg_model(spp_data = spp_data,
                                             tuneParam = TRUE,
                                             k = 5,
-                                            filepath = sprintf("bushfireResponse_data/outputs/model/MaxEnt_outputs/%s",
+                                            filepath = sprintf("bushfireResponse_data/outputs_1990/model/MaxEnt_outputs/%s",
                                                                gsub(" ", "_", species)))
     
     saveRDS(model,
-            sprintf("bushfireResponse_data/outputs/model/model_%s.rds",
+            sprintf("bushfireResponse_data/outputs_1990/model/model_%s.rds",
                     gsub(" ", "_", species)))
     
     ## Presence absence model
@@ -255,7 +255,7 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
                                                 parallel = FALSE)
     
     raster::writeRaster(prediction,
-                        sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
+                        sprintf("bushfireResponse_data/outputs_1990/predictions/predictions_%s.tif",
                                 gsub(" ", "_", species)),
                         overwrite = TRUE)
     
@@ -263,7 +263,7 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
                                                            threshold = model_eval[3])
     
     raster::writeRaster(prediction_threshold,
-                        sprintf("bushfireResponse_data/outputs/predictions/predictions_%s_threshold.tif",
+                        sprintf("bushfireResponse_data/outputs_1990/predictions/predictions_%s_threshold.tif",
                                 gsub(" ", "_", species)),
                         overwrite = TRUE)
     
@@ -290,5 +290,5 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
 meta_data <- sessionInfo()
 
 saveRDS(meta_data,
-        sprintf("bushfireResponse_data/outputs/meta_data/meta_data_%s.rds",
+        sprintf("bushfireResponse_data/outputs_1990/meta_data/meta_data_%s.rds",
                 gsub(" ", "_", species)))
