@@ -13,7 +13,7 @@
 #SBATCH --cpus-per-task=1
 #
 # Set memory limit
-#SBATCH --mem=40000
+#SBATCH --mem=80000
 #
 # Set wall time
 #SBATCH --time=1-00

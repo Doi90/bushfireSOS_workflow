@@ -241,7 +241,8 @@ if(nrow(spp_data$data[spp_data$data$Value == 1, ]) >= 20){
     
     raster::writeRaster(prediction,
                         sprintf("bushfireResponse_data/outputs/predictions/predictions_%s.tif",
-                                gsub(" ", "_", species)))
+                                gsub(" ", "_", species)),
+                        overwrite = TRUE)
     
     mapview::mapview(prediction)
     
