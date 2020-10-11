@@ -43,9 +43,9 @@
 ## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
 ## Date completed: "23/06/2020"
 
-species <- ""
+species <- "Saltuarius moritzi"
 
-guild <- ""
+guild <- "Reptiles"
 
 #####################
 ### Load Packages ###
@@ -68,8 +68,12 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "asmart1@student.unimelb.edu.au",
-                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               email = "tianxiaoh@student.unimelb.edu.au",
+                                               dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                               dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
+                                               file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -105,7 +109,8 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            background_group = "vertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
-
+table(spp_data$data$Value)
+bushfireSOS::map_sp_data(spp_data,only_presences = T)
 #######################
 ### Data Extraction ###
 #######################

@@ -41,7 +41,7 @@
 ## Built SDM: N
 ## Data available: PO
 ## Type of SDM: PresBG/PresAbs/Hybrid
-## Number of presence records: 9
+## Number of presence records: 15 (after pixel filtering)
 ## Number of background points: NA
 ## Type of background points: NA
 ## Date completed: 3/7/20
@@ -72,8 +72,12 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS_improper(species = species,
                                                         region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                         save.map = FALSE,
                                                         map.directory = "outputs/data_outputs",
-                                                        email = "davidpw@student.unimelb.edu.au",
-                                                        file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                                        email = "tianxiaoh@student.unimelb.edu.au",
+                                                        dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                                        dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                                        file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
+                                                        file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                                        file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -93,7 +97,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles",
+env_data <- bushfireSOS::load_env_data(stack_dir = "bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################

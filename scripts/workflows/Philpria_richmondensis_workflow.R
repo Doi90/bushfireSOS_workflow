@@ -34,22 +34,27 @@
 ## Species: "Philoria richmondensis"
 ## Guild: "Frogs"
 ## Region: "
-## Analyst: "Adam"
+## Analyst: August
 ## Reviewer: "David" 
 ## SDM Required: N
 ## Used existing SDM: N             # Retain option to indicate method
-## Built SDM: N                     # Retain option to indicate method
-## Data available: PO/PA              # Retain option to indicate method
-## Type of SDM: PresBG/PresAbs/Hybrid # Retain option to indicate method
+## Built SDM: Y
+## Data available: PO
+## Type of SDM: PresBG
 ## Date completed: "24/06/2020"
 
-species <- "Philoria richmondensis" # species records = 0
+species <- "Philoria richmondensis" # species records = 36
 
 guild <- "Frogs"
 
+date_cutoff <- "1970-01-01"
+
+uncertainty_cutoff <- 1000
 #####################
 ### Load Packages ###
 #####################
+
+.libPaths("/home/davidpw/R/lib/3.6")
 
 library(bushfireSOS)
 
@@ -68,8 +73,12 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs/data_outputs",
-                                               email = "asmart1@student.unimelb.edu.au",
-                                               file.vic = "bushfireResponse_data/spp_data_raw/VIC sensitive species data/FAUNA_requested_spp_ALL.gdb")
+                                               email = "tianxiaoh@student.unimelb.edu.au",
+                                               dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                               dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                               file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
+                                               file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                               file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv")
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -89,7 +98,7 @@ nrow(spp_data$data)
 
 # Load appropriate environmental raster data
 
-env_data <- bushfireSOS::load_env_data(stack_file = "bushfireResponse_data/spatial_layers/raster_tiles",
+env_data <- bushfireSOS::load_env_data(stack_dir = "bushfireResponse_data/spatial_layers/raster_tiles",
                                        region = region)
 
 #########################
@@ -106,6 +115,13 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
+## Check that there are >= 20 presences (1s) and an appropriate number of
+## background points (1000 * number of states with data for target group,
+## or 10,000 for random)
+
+
+table(spp_data$data$Value)
+#bushfireSOS::map_sp_data(spp_data,only_presences = T)
 #######################
 ### Data Extraction ###
 #######################
@@ -113,9 +129,13 @@ spp_data <- bushfireSOS::background_points(species = species,
 spp_data <- bushfireSOS::env_data_extraction(spp_data = spp_data,
                                              env_data = env_data)
 
+# bushfireSOS::map_sp_data(spp_data,
+#                          only_presences = TRUE)
+
 saveRDS(spp_data,
         sprintf("bushfireResponse_data/outputs/spp_data/spp_data_%s.rds",
                 gsub(" ", "_", species)))
+
 
 #####################
 ### SDM Required? ###
