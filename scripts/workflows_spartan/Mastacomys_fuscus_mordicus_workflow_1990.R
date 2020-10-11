@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Mastacomys fuscus mordicus"
 
-guild <- ""
+guild <- "Mammals"
 
 date_cutoff <- "1990-01-01"
 

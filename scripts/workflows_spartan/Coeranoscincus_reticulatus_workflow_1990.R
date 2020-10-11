@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Coeranoscincus reticulatus"
 
-guild <- ""
+guild <- "Reptiles"
 
 date_cutoff <- "1990-01-01"
 

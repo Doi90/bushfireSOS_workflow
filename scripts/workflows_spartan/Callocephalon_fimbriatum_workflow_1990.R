@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Callocephalon fimbriatum"
 
-guild <- ""
+guild <- "Birds"
 
 date_cutoff <- "1990-01-01"
 

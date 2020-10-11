@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Monarcha melanopsis"
 
-guild <- ""
+guild <- "Birds"
 
 date_cutoff <- "1990-01-01"
 
@@ -94,6 +94,8 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
+region <- c("VIC","NSW","QLD","ACT")
+
 ## Presence absence data
 
 # spp_data <- bushfireSOS::load_pres_abs_data(species,
@@ -125,7 +127,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates_1990",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 100000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,

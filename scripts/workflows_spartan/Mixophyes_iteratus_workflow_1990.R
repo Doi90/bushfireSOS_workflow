@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Mixophyes iteratus"
 
-guild <- ""
+guild <- "Frogs"
 
 date_cutoff <- "1990-01-01"
 
