@@ -142,7 +142,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            spp_data = spp_data,
                                            guild = guild,
                                            region = region,
-                                           background_group = "vertebrates",
+                                           background_group = "vertebrates_1990",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
                                            sample_min = 1000)
 
