@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Euastacus diversus"
 
-guild <- ""
+guild <- "Spiny crayfish"
 
 date_cutoff <- "1990-01-01"
 
@@ -93,6 +93,8 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 # spp_data$map
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
+
+region <- "VIC"
 
 ## Presence absence data
 

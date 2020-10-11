@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Mixophyes balbus"
 
-guild <- ""
+guild <- "Frogs"
 
 date_cutoff <- "1990-01-01"
 
@@ -89,6 +89,8 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv",
                                                date.cutoff = date_cutoff,
                                                uncertainty.cutoff = uncertainty_cutoff)
+
+spp_data$data <- spp_data$data[spp_data$data$ID != 7, ]
 
 # spp_data$map
 

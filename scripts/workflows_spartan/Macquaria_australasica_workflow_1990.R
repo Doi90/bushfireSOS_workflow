@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Macquaria australasica"
 
-guild <- ""
+guild <- "Fish"
 
 date_cutoff <- "1990-01-01"
 

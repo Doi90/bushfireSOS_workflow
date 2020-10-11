@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Euastacus suttoni"
 
-guild <- ""
+guild <- "Spiny crayfish"
 
 date_cutoff <- "1990-01-01"
 

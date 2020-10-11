@@ -47,9 +47,13 @@
 ## Date completed:
 ## Any other comments:
 
-species <- ""
+species <- "Psophodes leucogaster lashmari"
 
-guild <- ""
+species1 <- "Psophodes leucogaster leucogaster"
+
+species2 <- "Psophodes leucogaster"
+
+guild <- "Birds"
 
 date_cutoff <- "1990-01-01"
 
@@ -90,6 +94,38 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                date.cutoff = date_cutoff,
                                                uncertainty.cutoff = uncertainty_cutoff)
 
+spp_data1 <- bushfireSOS::load_pres_bg_data_AUS(species = species1,
+                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                                save.map = FALSE,
+                                                map.directory = "outputs_1990/data_outputs",
+                                                email = "",
+                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                                dir.WA = "bushfireResponse_data/spp_data_raw",
+                                                dir.SA = "bushfireResponse_data/spp_data_raw",
+                                                dir.VIC = "bushfireResponse_data/spp_data_raw",
+                                                file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
+                                                file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                                file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv",
+                                                date.cutoff = date_cutoff,
+                                                uncertainty.cutoff = uncertainty_cutoff)
+
+spp_data2 <- bushfireSOS::load_pres_bg_data_AUS(species = species2,
+                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
+                                                save.map = FALSE,
+                                                map.directory = "outputs_1990/data_outputs",
+                                                email = "",
+                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
+                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
+                                                dir.WA = "bushfireResponse_data/spp_data_raw",
+                                                dir.SA = "bushfireResponse_data/spp_data_raw",
+                                                dir.VIC = "bushfireResponse_data/spp_data_raw",
+                                                file.VIC = "bushfireResponse_data/VBA_data_inverts_plants_updated_verts_0209202/original_spp_list",
+                                                file.SA = "bushfireResponse_data/spp_data_raw/BIODATAREQUESTS_table_UniMelbourne.xlsx",
+                                                file.BirdLife = "bushfireResponse_data/spp_data_raw/BirdLife/BirdLife_data.csv",
+                                                date.cutoff = date_cutoff,
+                                                uncertainty.cutoff = uncertainty_cutoff)
+
 # spp_data$map
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
@@ -125,7 +161,7 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            region = region,
                                            background_group = "vertebrates_1990",
                                            bias_layer = "bushfireResponse_data/spatial_layers/aus_road_distance_250_aa.tif",
-                                           sample_min = 1000)
+                                           sample_min = 100000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
