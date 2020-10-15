@@ -31,10 +31,10 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:
-## Guild:
-## Region:
-## Analyst:
+## Species: Acrobates pygmaeus
+## Guild: Mammals
+## Region: SA, VIC, NSW, QLD
+## Analyst: 
 ## Reviewer:
 ## SDM Required: Y/N
 ## Used existing SDM: Y/N
@@ -47,9 +47,9 @@
 ## Date completed:
 ## Any other comments:
 
-species <- "Eurostopodus mystacalis"
+species <- "Acrobates pygmaeus"
 
-guild <- "Birds"
+guild <- "Mammals"
 
 date_cutoff <- "1990-01-01"
 
@@ -78,7 +78,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs_1990/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "dbrizuela@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
                                                dir.WA = "bushfireResponse_data/spp_data_raw",
@@ -91,6 +91,10 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                uncertainty.cutoff = uncertainty_cutoff)
 
 # spp_data$map
+bushfireSOS::map_sp_data(spp_data, crs = 4283)
+
+# remove outlier
+spp_data <- bushfireSOS::remove_points(spp_data = spp_data, long = 140.8007, lat = -34.11226)
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
