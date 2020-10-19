@@ -45,7 +45,7 @@
 ## Number of background points:
 ## Type of background points:
 ## Date completed:
-## Any other comments:
+## Any other comments: no outliers
 
 species <- "Cercartetus nanus"
 
@@ -78,7 +78,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs_1990/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "dbrizuela@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
                                                dir.WA = "bushfireResponse_data/spp_data_raw",
@@ -93,8 +93,6 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 # spp_data$map
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
-
-# apparnetly not reading the data from VIC or SA?
 
 ## Presence absence data
 

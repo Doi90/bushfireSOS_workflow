@@ -33,7 +33,7 @@
 
 ## Species: Aepyprymnus rufescens
 ## Guild: Mammals
-## Region: VIC, NSW, QLD
+## Region: NSW, QLD
 ## Analyst:
 ## Reviewer:
 ## SDM Required: Y/N
@@ -97,8 +97,9 @@ spp_data <- bushfireSOS::remove_points(spp_data, long = 141.6678, lat = -36.4558
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
-# remove records from SA
-region <- region[-4]
+# remove records from SA and VIC
+region <- region[-c(3,4)]
+
 
 ## Presence absence data
 
