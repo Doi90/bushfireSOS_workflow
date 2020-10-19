@@ -34,7 +34,7 @@
 ## Species: Acrobates pygmaeus
 ## Guild: Mammals
 ## Region: SA, VIC, NSW, QLD
-## Analyst: 
+## Analyst:
 ## Reviewer:
 ## SDM Required: Y/N
 ## Used existing SDM: Y/N
@@ -91,10 +91,6 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                uncertainty.cutoff = uncertainty_cutoff)
 
 # spp_data$map
-bushfireSOS::map_sp_data(spp_data, crs = 4283)
-
-# remove outlier
-spp_data <- bushfireSOS::remove_points(spp_data = spp_data, long = 140.8007, lat = -34.11226)
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
@@ -107,6 +103,13 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 ## If <20 can end workflow here
 
 nrow(spp_data$data)
+
+saveRDS(spp_data,
+        sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+                gsub(" ", "_", species)))
+
+# spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+#                             gsub(" ", "_", species)))
 
 ###############################
 ### Load Environmental Data ###
