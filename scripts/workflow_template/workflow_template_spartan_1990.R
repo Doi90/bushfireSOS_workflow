@@ -104,6 +104,13 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
 nrow(spp_data$data)
 
+saveRDS(spp_data,
+        sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+                gsub(" ", "_", species)))
+
+# spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+#                             gsub(" ", "_", species)))
+
 ###############################
 ### Load Environmental Data ###
 ###############################
