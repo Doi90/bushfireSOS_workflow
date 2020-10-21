@@ -31,7 +31,7 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: Chalinolobus dwyeri
+## Species: Rattus lutreolus
 ## Guild: Mammals
 ## Region:
 ## Analyst:
@@ -47,7 +47,7 @@
 ## Date completed:
 ## Any other comments:
 
-species <- "Chalinolobus dwyeri"
+species <- "Rattus lutreolus"
 
 guild <- "Mammals"
 

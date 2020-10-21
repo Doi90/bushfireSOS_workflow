@@ -31,7 +31,7 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: Chalinolobus dwyeri
+## Species: Thylogale thetis 
 ## Guild: Mammals
 ## Region:
 ## Analyst:
@@ -47,7 +47,7 @@
 ## Date completed:
 ## Any other comments:
 
-species <- "Chalinolobus dwyeri"
+species <- "Thylogale thetis"
 
 guild <- "Mammals"
 
@@ -78,7 +78,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs_1990/data_outputs",
-                                               email = "davidpw@student.unimelb.edu.au",
+                                               email = "dbrizuela@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
                                                dir.WA = "bushfireResponse_data/spp_data_raw",
@@ -91,6 +91,9 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                uncertainty.cutoff = uncertainty_cutoff)
 
 # spp_data$map
+
+# remove outliers by coordinates
+spp_data <- bushfireSOS::remove_points(spp_data, long = c(146.1154, 146.1379, 145.6191), lat = c(-19.06902, -19.03356, -16.84131))
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 

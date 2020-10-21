@@ -33,7 +33,7 @@
 
 ## Species: Antechinus agilis
 ## Guild: Mammals
-## Region: VIC, NSW
+## Region: 
 ## Analyst:
 ## Reviewer:
 ## SDM Required: Y/N
@@ -92,8 +92,6 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 
 # spp_data$map
 
-# no outliers
-
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
 ## Presence absence data
@@ -105,6 +103,13 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 ## If <20 can end workflow here
 
 nrow(spp_data$data)
+
+saveRDS(spp_data,
+        sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+                gsub(" ", "_", species)))
+
+# spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+#                             gsub(" ", "_", species)))
 
 ###############################
 ### Load Environmental Data ###

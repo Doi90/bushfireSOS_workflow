@@ -31,9 +31,9 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species:Rattus fuscipes
+## Species: Rattus fuscipes
 ## Guild: Mammals
-## Region: WA, SA, VIC, NSW, QLD
+## Region:
 ## Analyst:
 ## Reviewer:
 ## SDM Required: Y/N
@@ -78,7 +78,7 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
                                                region = c("VIC", "NSW", "QLD", "SA", "NT", "WA", "TAS"),
                                                save.map = FALSE,
                                                map.directory = "outputs_1990/data_outputs",
-                                               email = "dbrizuela@student.unimelb.edu.au",
+                                               email = "davidpw@student.unimelb.edu.au",
                                                dir.NSW = "bushfireResponse_data/spp_data_raw",
                                                dir.QLD = "bushfireResponse_data/spp_data_raw",
                                                dir.WA = "bushfireResponse_data/spp_data_raw",
@@ -103,6 +103,13 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 ## If <20 can end workflow here
 
 nrow(spp_data$data)
+
+saveRDS(spp_data,
+        sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+                gsub(" ", "_", species)))
+
+# spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+#                             gsub(" ", "_", species)))
 
 ###############################
 ### Load Environmental Data ###

@@ -33,7 +33,7 @@
 
 ## Species: Nyctophilus gouldi 
 ## Guild: Mammals
-## Region: WA, SA, TAS, VIC, NSW, QLD
+## Region:
 ## Analyst:
 ## Reviewer:
 ## SDM Required: Y/N
@@ -45,7 +45,7 @@
 ## Number of background points:
 ## Type of background points:
 ## Date completed:
-## Any other comments: Data from VIC and WA not being read when screening for outliers
+## Any other comments:
 
 species <- "Nyctophilus gouldi"
 
@@ -92,6 +92,9 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 
 # spp_data$map
 
+# remove 1 outlier
+spp_data <- bushfireSOS::remove_points(spp_data, long = 133.6010, lat = -30.17472)
+
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
 ## Presence absence data
@@ -103,6 +106,13 @@ region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 ## If <20 can end workflow here
 
 nrow(spp_data$data)
+
+saveRDS(spp_data,
+        sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+                gsub(" ", "_", species)))
+
+# spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+#                             gsub(" ", "_", species)))
 
 ###############################
 ### Load Environmental Data ###

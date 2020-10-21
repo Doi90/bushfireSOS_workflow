@@ -92,14 +92,10 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 
 # spp_data$map
 
-# remove one outlier from VIC
-spp_data <- bushfireSOS::remove_points(spp_data, long = 141.6678, lat = -36.45581)
-
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
-# remove records from SA and VIC
-region <- region[-c(3,4)]
-
+# remove outliers by region
+region <- c("NSW", "QLD")
 
 ## Presence absence data
 
@@ -110,6 +106,13 @@ region <- region[-c(3,4)]
 ## If <20 can end workflow here
 
 nrow(spp_data$data)
+
+saveRDS(spp_data,
+        sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+                gsub(" ", "_", species)))
+
+# spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp_data_%s.rds",
+#                             gsub(" ", "_", species)))
 
 ###############################
 ### Load Environmental Data ###
