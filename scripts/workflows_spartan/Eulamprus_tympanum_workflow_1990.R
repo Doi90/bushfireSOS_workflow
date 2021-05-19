@@ -94,6 +94,8 @@ spp_data <- bushfireSOS::load_pres_bg_data_AUS(species = species,
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
+region <- c(region, "VIC")
+
 ## Presence absence data
 
 # spp_data <- bushfireSOS::load_pres_abs_data(species,

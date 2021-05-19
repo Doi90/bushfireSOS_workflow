@@ -113,6 +113,8 @@ spp_data <- readRDS(sprintf("bushfireResponse_data/outputs_1990/spp_data_tmp/spp
 
 region <- bushfireSOS::species_data_get_state_character(spp_data$data)
 
+region <- c(region, "TAS")
+
 ###############################
 ### Load Environmental Data ###
 ###############################

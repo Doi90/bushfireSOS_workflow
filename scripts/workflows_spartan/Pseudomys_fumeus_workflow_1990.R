@@ -51,7 +51,7 @@ species <- "Pseudomys fumeus"
 
 guild <- "Mammals"
 
-date_cutoff <- "1990-01-01"
+date_cutoff <- "2000-01-01"
 
 uncertainty_cutoff <- 1000
 

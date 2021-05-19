@@ -31,7 +31,7 @@
 ### WORKFLOW DETAILS ###
 ########################
 
-## Species: Graycassis bruxner
+## Species: Austrorhytida nandewarensis
 ## Guild: invertebrates
 ## Region:
 ## Analyst:
@@ -47,7 +47,7 @@
 ## Date completed:
 ## Any other comments:
 
-species <- "Graycassis bruxner"
+species <- "Austrorhytida nandewarensis"
 
 guild <- "invertebrates"
 
@@ -73,7 +73,10 @@ library(bushfireSOS)
 # data becomes available at a later date
 
 ## Presence background data
-spp_data <- bushfireSOS::load_pres_inverts(file = "bushfireResponse_data/spp_data_raw/priority_inverts_data.csv")
+spp_data <- bushfireSOS::load_pres_inverts(file = "bushfireResponse_data/spp_data_raw/priority_inverts_data.csv",
+                                           species = species,
+                                           date.cutoff = date_cutoff,
+                                           uncertainty.cutoff = uncertainty_cutoff)
 
 # spp_data$map
 
@@ -115,9 +118,9 @@ spp_data <- bushfireSOS::background_points(species = species,
                                            spp_data = spp_data,
                                            guild = guild,
                                            region = region,
-                                           background_group = "vertebrates",
+                                           background_group = "invertebrates",
                                            bias_layer = "bushfireResponse_data/spatial_layers/bias_layer_inverts.tif",
-                                           sample_min = 1000)
+                                           sample_min = 1000000)
 
 ## Check that there are >= 20 presences (1s) and an appropriate number of
 ## background points (1000 * number of states with data for target group,
